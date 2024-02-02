@@ -1,6 +1,6 @@
 package lk.leon.app.bookingapp.entity;
 
-import lk.leon.app.bookingapp.util.HotelType;
+import lk.leon.app.bookingapp.util.AccommodationType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +11,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "hotel")
-public class Hotel implements SuperEntity{
+@Table(name = "accommodation")
+public class Accommodation implements SuperEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -20,7 +20,7 @@ public class Hotel implements SuperEntity{
     private String name;
     @Column(length = 100, nullable = false)
     private String city;
-//    @Enumerated(EnumType.STRING)
-//    private HotelType type;
+    @Enumerated(EnumType.STRING)
+    private AccommodationType type;
 
 }
