@@ -5,5 +5,5 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/accommodations")
-public class AccommodationHttpController {
+public class HotelHttpController {
 }
