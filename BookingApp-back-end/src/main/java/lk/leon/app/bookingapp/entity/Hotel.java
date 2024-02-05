@@ -6,12 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Positive;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "accommodation")
+@Table(name = "hotel")
 public class Hotel implements SuperEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +27,11 @@ public class Hotel implements SuperEntity{
     @Column(nullable = false, columnDefinition = "ENUM('APARTMENT','RESORT','VILLA')")
     private HotelType type;
     @Column(name = "charge_per_night", nullable = false)
-    private String ChargePerNight;
+    @Positive
+    private int ChargePerNight;
+
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    private List<Picture> pictureList;
 
 
 }
