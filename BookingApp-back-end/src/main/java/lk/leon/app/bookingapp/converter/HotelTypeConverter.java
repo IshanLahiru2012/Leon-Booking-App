@@ -11,7 +11,6 @@ public class HotelTypeConverter implements Converter<String, HotelType> {
         for (HotelType type: HotelType.values() ) {
             if(type.getType().equalsIgnoreCase(source)){
                 return type;
-
             }
         }
         return null;

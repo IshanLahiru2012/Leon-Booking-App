@@ -1,6 +1,7 @@
 package lk.leon.app.bookingapp.entity;
 
 import lk.leon.app.bookingapp.util.HotelType;
+import lk.leon.app.bookingapp.validation.HotelImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,10 +29,15 @@ public class Hotel implements SuperEntity{
     private HotelType type;
     @Column(name = "charge_per_night", nullable = false)
     @Positive
-    private int ChargePerNight;
+    private int chargePerNight;
 
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     private List<Picture> pictureList;
 
-
+    public Hotel(String name, String city, HotelType type, int chargePerNight) {
+        this.name = name;
+        this.city = city;
+        this.type = type;
+        this.chargePerNight = chargePerNight;
+    }
 }

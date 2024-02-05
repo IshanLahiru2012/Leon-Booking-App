@@ -21,5 +21,8 @@ public class Picture implements SuperEntity{
     @JoinColumn(name = "hotel_id", nullable = false)
     private Hotel hotel;
 
-
+    public Picture(String picturePath, Hotel hotel) {
+        this.picturePath = picturePath;
+        this.hotel = hotel;
+    }
 }
