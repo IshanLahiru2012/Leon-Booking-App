@@ -30,6 +30,6 @@ public class HotelReqTo implements Serializable {
     private HotelType type;
     @Positive(message = "charges cannot be negative")
     private int ChargePerNight;
-    @HotelImage
+    @HotelImage()
     private List<MultipartFile> pictureList;
 }

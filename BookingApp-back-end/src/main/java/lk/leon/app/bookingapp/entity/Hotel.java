@@ -5,6 +5,7 @@ import lk.leon.app.bookingapp.validation.HotelImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -31,6 +32,7 @@ public class Hotel implements SuperEntity{
     @Positive
     private int chargePerNight;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     private List<Picture> pictureList;
 

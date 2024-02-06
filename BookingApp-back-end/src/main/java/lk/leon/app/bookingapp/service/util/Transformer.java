@@ -25,6 +25,7 @@ public class Transformer {
 
     public Hotel fromHotelReqTo(HotelReqTo hotelReqTo){
         Hotel hotel = modelMapper.map(hotelReqTo, Hotel.class);
+        hotel.setPictureList(null);
         return hotel;
     }
     public Hotel fromHotelTo(HotelTo hotelTo){
@@ -33,6 +34,7 @@ public class Transformer {
     }
     public HotelTo toHotelTo(Hotel hotel){
         HotelTo hotelTo = modelMapper.map(hotel, HotelTo.class);
+        hotelTo.setPictureList(null);
         return hotelTo;
     }
     public List<HotelTo> toHotelTo(List<Hotel> hotelList){

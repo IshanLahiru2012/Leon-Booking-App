@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = HotelImageConstraintValidator.class)
 public @interface HotelImage {
-    long maximumFileSize() default 1024*1024*3;
+    long maximumFileSize() default 1024*1024*3 ;
     String message() default "Invalid image file or exceeds the maximum file size {maximumFileSize} kb";
 
     Class<?>[] groups() default {};

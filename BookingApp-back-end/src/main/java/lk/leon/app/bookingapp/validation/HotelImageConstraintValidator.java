@@ -4,8 +4,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.List;
 
-public class HotelImageConstraintValidator implements ConstraintValidator<HotelImage, MultipartFile> {
+public class HotelImageConstraintValidator implements ConstraintValidator<HotelImage, List<MultipartFile>> {
 
     private long maximumFileSize;
     @Override
@@ -14,10 +15,17 @@ public class HotelImageConstraintValidator implements ConstraintValidator<HotelI
     }
 
     @Override
-    public boolean isValid(MultipartFile multipartFile, ConstraintValidatorContext constraintValidatorContext) {
-        if(multipartFile.isEmpty() || multipartFile == null) return true;
-        if(multipartFile.getContentType() == null || !multipartFile.getContentType().startsWith("image/")) return false;
-        return multipartFile.getSize() <= maximumFileSize;
-
+    public boolean isValid(List<MultipartFile> multipartFiles, ConstraintValidatorContext constraintValidatorContext) {
+        if(multipartFiles == null || multipartFiles.size() == 0 ) {
+            return true;
+        }
+        for (MultipartFile multipartFile: multipartFiles ) {
+            if(multipartFile.isEmpty()) return true;
+            if(multipartFile.getContentType() == null || !multipartFile.getContentType().startsWith("image/")) return false;
+            return multipartFile.getSize() <= maximumFileSize;
+        }
+        return true;
     }
+
+
 }

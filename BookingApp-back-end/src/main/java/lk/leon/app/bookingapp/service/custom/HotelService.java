@@ -5,6 +5,7 @@ import lk.leon.app.bookingapp.to.HotelTo;
 import lk.leon.app.bookingapp.to.request.HotelReqTo;
 import lk.leon.app.bookingapp.util.HotelType;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface HotelService extends SuperService {
