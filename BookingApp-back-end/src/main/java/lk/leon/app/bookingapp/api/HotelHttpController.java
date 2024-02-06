@@ -27,14 +27,28 @@ public class HotelHttpController {
         return hotelService.saveHotel(hotelReqTo);
     }
 
-    @GetMapping(value = "/{hotel_id}", produces = "application/json")
-    public HotelTo getHotelDetails(@PathVariable("hotel_id") Integer hotelId){
+    @GetMapping(value = "/{hotel-id}", produces = "application/json")
+    public HotelTo getHotelDetails(@PathVariable("hotel-id") Integer hotelId){
         return hotelService.getHotelDetails(hotelId);
+    }
+    @PatchMapping(value = "/{hotel-id}",consumes = "multipart/form-data")
+    public void updateHotelwithImages(@ModelAttribute @Validated HotelReqTo hotelReqTo,
+                                      @PathVariable("hotel-id") Integer hotelId){
+        hotelReqTo.setId(hotelId);
+        hotelService.updateHotelViaMultipart(hotelReqTo);
+
+    }
+    @DeleteMapping(value = "/{hotel-id}")
+    public void deleteHotel(@PathVariable("hotel-id") Integer hotelId){
+        hotelService.deleteHotel(hotelId);
+
     }
 
     @GetMapping(produces = "application/json")
     public List<HotelTo> getHotelByType(@RequestParam(required = false) HotelType type){
         return hotelService.getHotels(type);
     }
+
+
 
 }

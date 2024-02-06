@@ -30,6 +30,7 @@ public class Transformer {
     }
     public Hotel fromHotelTo(HotelTo hotelTo){
         Hotel hotel = modelMapper.map(hotelTo, Hotel.class);
+        hotel.setPictureList(null);
         return hotel;
     }
     public HotelTo toHotelTo(Hotel hotel){

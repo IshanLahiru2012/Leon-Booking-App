@@ -33,7 +33,7 @@ public class Hotel implements SuperEntity{
     private int chargePerNight;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.REMOVE)
     private List<Picture> pictureList;
 
     public Hotel(String name, String city, HotelType type, int chargePerNight) {

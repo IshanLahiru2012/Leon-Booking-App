@@ -43,24 +43,12 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public HotelTo saveHotel(HotelReqTo hotelReqTo){
         Hotel hotel = transformer.fromHotelReqTo(hotelReqTo);
-        System.out.println(hotel);
         hotelRepository.save(hotel);
 
-        ArrayList<String> urlList = new ArrayList<>();
+        List<String> urlList = new ArrayList<>();
 
-        if(hotelReqTo.getPictureList() != null && hotelReqTo.getPictureList().size() != 0 ){
-            List<MultipartFile> pictureList = hotelReqTo.getPictureList();
-
-            for (int i = 0; i < pictureList.size(); i++) {
-                try {
-                    Picture picture = new Picture("hotel/" + hotel.getId() + "/" + i, hotel);
-                    pictureRepository.save(picture);
-                    Blob blob = bucket.create(picture.getPicturePath(), pictureList.get(i).getInputStream(), pictureList.get(i).getContentType());
-                    urlList.add(blob.signUrl(1,TimeUnit.DAYS, Storage.SignUrlOption.withV4Signature()).toString());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+        if(hotelReqTo.getPictureList() != null && hotelReqTo.getPictureList().size() > 0 ){
+            urlList=savePictures(hotelReqTo,hotel);
         }
         HotelTo hotelTo = transformer.toHotelTo(hotel);
         if(urlList.size()>0){
@@ -68,20 +56,62 @@ public class HotelServiceImpl implements HotelService {
         }
         return hotelTo;
     }
-
     @Override
     public void updateHotelViaMultipart(HotelReqTo hotelReqTo) {
+        Hotel currentHotel = hotelRepository.findById(hotelReqTo.getId())
+                .orElseThrow(() -> new RuntimeException("No hotel associated with the id"));
+        Hotel newHotel = transformer.fromHotelReqTo(hotelReqTo);
+        if(currentHotel.getPictureList().size() >0){
+            for (Picture picture : currentHotel.getPictureList()){
+                pictureRepository.delete(picture);
+                bucket.get(picture.getPicturePath()).delete();
+            }
+        }
+        newHotel = hotelRepository.save(newHotel);
 
+        if(hotelReqTo.getPictureList() != null && hotelReqTo.getPictureList().size() > 0){
+            savePictures(hotelReqTo, newHotel);
+        }
+    }
+    public List<String> savePictures(HotelReqTo hotelReqTo, Hotel hotel){
+        List<String> urlList = new ArrayList<>();
+        List<MultipartFile> pictureList = hotelReqTo.getPictureList();
+
+        for (int i = 0; i < pictureList.size(); i++) {
+            try {
+                Picture picture = new Picture("hotel/" + hotel.getId() + "/" + i, hotel);
+                pictureRepository.save(picture);
+                Blob blob = bucket.create(picture.getPicturePath(), pictureList.get(i).getInputStream(), pictureList.get(i).getContentType());
+                urlList.add(blob.signUrl(1,TimeUnit.DAYS, Storage.SignUrlOption.withV4Signature()).toString());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return urlList;
     }
 
     @Override
     public void updateHotelViaJson(HotelTo hotelTo) {
-
+        Hotel currentHotel = hotelRepository.findById(hotelTo.getId())
+                .orElseThrow(() -> new RuntimeException("No hotel associated with the id"));
+        Hotel newhotel = transformer.fromHotelTo(hotelTo);
+        if(currentHotel.getPictureList().size() >0){
+            for (Picture picture : currentHotel.getPictureList()){
+                pictureRepository.delete(picture);
+                bucket.get(picture.getPicturePath()).delete();
+            }
+        }
+        hotelRepository.save(newhotel);
     }
 
     @Override
     public void deleteHotel(Integer hotelId) {
-
+        Hotel hotel = hotelRepository.findById(hotelId)
+                .orElseThrow(() -> new RuntimeException("No hotel Associated with the id"));
+        hotelRepository.deleteById(hotelId);
+        for ( Picture picture :hotel.getPictureList() ) {
+            bucket.get(picture.getPicturePath()).delete();
+        }
     }
 
     @Override

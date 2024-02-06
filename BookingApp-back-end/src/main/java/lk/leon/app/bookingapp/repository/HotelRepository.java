@@ -13,7 +13,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
 
 
     List<Hotel> findHotelByType(HotelType type);
-    @Query("SELECT h FROM Hotel h WHERE h.type = lk.leon.app.bookingapp.util.HotelType.APARTMENTS")
+    @Query("SELECT h FROM Hotel h WHERE h.type = lk.leon.app.bookingapp.util.HotelType.APARTMENT")
     List<Hotel> findApartmentHotels();
     @Query("SELECT h FROM Hotel h WHERE h.type = lk.leon.app.bookingapp.util.HotelType.RESORT")
     List<Hotel> findResortHotel();
