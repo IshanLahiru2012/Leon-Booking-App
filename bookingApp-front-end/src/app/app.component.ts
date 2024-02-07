@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  template: `
+    <app-main/>
+  `
 })
 export class AppComponent {
-  title = 'bookingApp_front_end';
+  title = 'bookingApp-front-end';
 }
