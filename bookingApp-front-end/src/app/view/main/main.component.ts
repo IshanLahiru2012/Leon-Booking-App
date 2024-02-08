@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-main',
   template: `
     <app-header/>
+    <app-form/>
   `,
   styleUrl: './main.component.scss'
 })
