@@ -6,6 +6,7 @@ import { MainComponent } from './view/main/main.component';
 import { HeaderComponent } from './view/header/header.component';
 import { FormComponent } from './view/form/form.component';
 import { BodyComponent } from './view/body/body.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -15,9 +16,10 @@ import { BodyComponent } from './view/body/body.component';
     FormComponent,
     BodyComponent
   ],
-  imports: [
-    BrowserModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

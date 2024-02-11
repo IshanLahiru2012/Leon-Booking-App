@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-form',
@@ -12,22 +12,12 @@ import { Component } from '@angular/core';
 
 
     </form>
-    <h1>{{title}}</h1>
-    <button class="border-2" (click)="handleclick()">click me </button>
+
+
   `,
   styleUrl: './form.component.scss'
 })
 export class FormComponent {
-  title= "hello test";
 
-  handleclick(){
-
-    if(this.title != "changed"){
-      this.title = "changed";
-    }else {
-      this.title = "first";
-    }
-
-  }
 
 }
