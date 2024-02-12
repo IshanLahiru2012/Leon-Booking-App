@@ -29,7 +29,7 @@ public class HotelReqTo implements Serializable {
     @Enumerated(EnumType.STRING)
     private HotelType type;
     @Positive(message = "charges cannot be negative")
-    private int ChargePerNight;
+    private int chargePerNight;
     @HotelImage()
     private List<MultipartFile> pictureList;
 }

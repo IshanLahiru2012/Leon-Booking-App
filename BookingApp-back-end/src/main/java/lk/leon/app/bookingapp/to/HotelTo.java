@@ -27,7 +27,7 @@ public class HotelTo {
     private HotelType type;
     @Column(name = "charge_per_night", nullable = false)
     @Positive(message = "charges cannot be negative")
-    private int ChargePerNight;
+    private int chargePerNight;
     @Null(message = "Picture should be empty")
     private List<String> pictureList;
 

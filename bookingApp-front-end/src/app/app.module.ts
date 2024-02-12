@@ -7,6 +7,9 @@ import { HeaderComponent } from './view/header/header.component';
 import { FormComponent } from './view/form/form.component';
 import { BodyComponent } from './view/body/body.component';
 import {FormsModule} from "@angular/forms";
+import { PropertyComponent } from './view/property/property.component';
+import { PropertyListComponent } from './view/property-list/property-list.component';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +17,9 @@ import {FormsModule} from "@angular/forms";
     MainComponent,
     HeaderComponent,
     FormComponent,
-    BodyComponent
+    BodyComponent,
+    PropertyComponent,
+    PropertyListComponent
   ],
     imports: [
         BrowserModule,
