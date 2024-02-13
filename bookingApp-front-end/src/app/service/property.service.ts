@@ -5,5 +5,4 @@ export abstract class PropertyService {
   abstract isInitialized(): boolean;
 
   abstract getAllProperty(): Array<PropertyDto>;
-  constructor() { }
 }

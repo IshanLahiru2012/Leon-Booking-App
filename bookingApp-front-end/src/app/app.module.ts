@@ -9,6 +9,9 @@ import { BodyComponent } from './view/body/body.component';
 import {FormsModule} from "@angular/forms";
 import { PropertyComponent } from './view/property/property.component';
 import { PropertyListComponent } from './view/property-list/property-list.component';
+import {PropertyService} from "./service/property.service";
+import {PropertyServiceImpl} from "./service/property-service-impl";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -23,9 +26,13 @@ import { PropertyListComponent } from './view/property-list/property-list.compon
   ],
     imports: [
         BrowserModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
+
     ],
-  providers: [],
+  providers: [
+    {provide: PropertyService, useClass:PropertyServiceImpl}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

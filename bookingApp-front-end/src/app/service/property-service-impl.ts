@@ -21,4 +21,8 @@ export class PropertyServiceImpl implements PropertyService{
     return this.propertyList;
   }
 
+  isInitialized(): boolean {
+    return false;
+  }
+
 }
