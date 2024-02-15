@@ -8,8 +8,7 @@ import {PropertyService} from "../../service/property.service";
       <div class="grid grid-cols-4 gap-2 ">
         <div *ngFor="let property of propertyService.getAllProperty()" >
             <app-property [property]="property"/>
-      </div>
-
+        </div>
       </div>
     </div>
 

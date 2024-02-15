@@ -12,7 +12,25 @@ import { PropertyListComponent } from './view/property-list/property-list.compon
 import {PropertyService} from "./service/property.service";
 import {PropertyServiceImpl} from "./service/property-service-impl";
 import {HttpClientModule} from "@angular/common/http";
+import { ImageListComponent } from './view/image-list/image-list.component';
+import { RouterModule, Routes } from '@angular/router';
 
+
+const APP_ROUTES: Routes=[
+  {
+    path:'',
+    pathMatch: 'full',
+    redirectTo: '/app'
+  },
+  {
+    path: 'image',
+    component: ImageListComponent
+  },
+  {
+    path: 'app',
+    component: MainComponent
+  }
+]
 
 @NgModule({
   declarations: [
@@ -22,14 +40,17 @@ import {HttpClientModule} from "@angular/common/http";
     FormComponent,
     BodyComponent,
     PropertyComponent,
-    PropertyListComponent
+    PropertyListComponent,
+    ImageListComponent
   ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpClientModule
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(APP_ROUTES)
 
-    ],
+  ],
+  exports: [RouterModule],
   providers: [
     {provide: PropertyService, useClass:PropertyServiceImpl}
   ],
