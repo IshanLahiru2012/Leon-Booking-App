@@ -29,6 +29,10 @@ const APP_ROUTES: Routes=[
   {
     path: 'app',
     component: MainComponent
+  },
+  {
+    path:'property-list',
+    component: PropertyListComponent
   }
 ]
 

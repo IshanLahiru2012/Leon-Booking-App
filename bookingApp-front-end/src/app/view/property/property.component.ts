@@ -11,7 +11,8 @@ import {Router} from "@angular/router";
       <div *ngIf="property.pictureList" >
         <img [src]="property.pictureList[0]" alt="Property Image">
       </div>
-      <a class="pl-4 font-bold hover:underline hover:cursor-pointer" routerLink="/image" (click)="imageHandler()"> {{property.name}} </a>
+      <a class="pl-4 font-bold hover:underline hover:cursor-pointer" [routerLink]="['/image']"
+                    [queryParams]="{propertyImageList: property.pictureList}"> {{property.name}} </a>
       <p class="text-gray-400 text-sm pl-5">{{property.city}}</p>
     </div>
 
@@ -30,4 +31,6 @@ export class PropertyComponent {
   imageHandler() {
     this.router.navigateByUrl('/image')
   }
+
+  protected readonly MouseEvent = MouseEvent;
 }

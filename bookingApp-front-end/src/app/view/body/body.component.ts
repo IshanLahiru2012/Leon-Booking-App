@@ -4,10 +4,15 @@ import { Component } from '@angular/core';
   selector: 'app-body',
   template: `
     <p class="m-2 font-bold text-white text-xl">Browse by property type</p>
-    <button class="bg-amber-200 border-2 active:bg-amber-800" (click)="handle()">click body</button>
+    <button class="bg-amber-200 border-2 active:bg-amber-800" routerLink="/property-list" (click)="handle()">click body</button>
     <div *ngIf="valid">
-      <app-property-list/>
+      <router-outlet></router-outlet>
     </div>
+
+<!--    <button class="bg-amber-200 border-2 active:bg-amber-800" (click)="handle()">click body</button>-->
+<!--    <div *ngIf="valid">-->
+<!--      <app-property-list/>-->
+<!--    </div>-->
 
   `,
   styleUrl: './body.component.scss'
