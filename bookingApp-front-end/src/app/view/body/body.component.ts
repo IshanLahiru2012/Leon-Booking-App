@@ -1,28 +1,38 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-body',
   template: `
-    <p class="m-2 font-bold text-white text-xl">Browse by property type</p>
-    <button class="bg-amber-200 border-2 active:bg-amber-800" routerLink="/property-list" (click)="handle()">click body</button>
-    <div *ngIf="valid">
+    <ng-container *ngIf="!navigating" >
+      <p class="m-2 font-bold text-amber-800 text-xl">Browse by property type</p>
+      <div class="flex gap-2 border-b">
+        <div *ngFor="let propertyType of propertyTypeList" >
+          <div class="p-2 ">
+            <img src="assets/images/{{propertyType}}.jpeg" class="rounded-lg hover:cursor-pointer"  (click)="handle(propertyType)">
+            <p class="font-medium text-sm hover:cursor-pointer hover:text-blue-600">{{propertyType}}</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="navigating">
       <router-outlet></router-outlet>
-    </div>
-
-<!--    <button class="bg-amber-200 border-2 active:bg-amber-800" (click)="handle()">click body</button>-->
-<!--    <div *ngIf="valid">-->
-<!--      <app-property-list/>-->
-<!--    </div>-->
-
+    </ng-container>
   `,
   styleUrl: './body.component.scss'
 })
 export class BodyComponent {
 
-  valid : boolean = false;
+  navigating : boolean = false;
+  propertyTypeList : string[] =['Hotels', 'Apartments', 'Resorts', 'Villas']
 
-  handle(){
-    this.valid = true;
+  constructor(private router: Router) {
+  }
+
+  handle(propertyType: string){
+    this.navigating = true;
+    this.router.navigateByUrl('/property-list')
+
 
   }
 

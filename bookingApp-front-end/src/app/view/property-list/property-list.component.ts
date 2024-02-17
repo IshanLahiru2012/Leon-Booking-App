@@ -4,8 +4,8 @@ import {PropertyService} from "../../service/property.service";
 @Component({
   selector: 'app-property-list',
   template: `
-    <div class="bg-white">
-      <div class="grid grid-cols-4 gap-2 ">
+    <div class="bg-amber-50 pt-2">
+      <div class="grid sm:grid-cols-1 md:grid-cols-2  gap-2 px-2">
         <div *ngFor="let property of propertyService.getAllProperty()" >
             <app-property [property]="property"/>
         </div>

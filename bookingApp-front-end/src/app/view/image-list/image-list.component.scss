@@ -1,0 +1,11 @@
+.image-container {
+  width: 100%; /* Ensure each container occupies the full width of its grid cell */
+  height: 200px; /* Let the image adjust its height proportionally */
+  overflow: hidden;
+}
+
+.image {
+  width: 100%; /* Ensure each image fills its container horizontally */
+  height: 100%; /* Ensure each image fills its container vertically */
+  object-fit: cover; /* Maintain aspect ratio and cover entire container */
+}

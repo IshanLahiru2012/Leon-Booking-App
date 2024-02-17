@@ -14,25 +14,27 @@ import {PropertyServiceImpl} from "./service/property-service-impl";
 import {HttpClientModule} from "@angular/common/http";
 import { ImageListComponent } from './view/image-list/image-list.component';
 import { RouterModule, Routes } from '@angular/router';
+import {ImageListService} from "./service/image.list.service";
 
 
 const APP_ROUTES: Routes=[
+
   {
-    path:'',
-    pathMatch: 'full',
-    redirectTo: '/app'
+    path: 'app',
+    component: BodyComponent,
   },
   {
     path: 'image',
     component: ImageListComponent
   },
   {
-    path: 'app',
-    component: MainComponent
-  },
-  {
     path:'property-list',
     component: PropertyListComponent
+  },
+  {
+    path:'',
+    pathMatch: 'full',
+    redirectTo: '/app'
   }
 ]
 
@@ -56,7 +58,7 @@ const APP_ROUTES: Routes=[
   ],
   exports: [RouterModule],
   providers: [
-    {provide: PropertyService, useClass:PropertyServiceImpl}
+    {provide: PropertyService, useClass:PropertyServiceImpl},
   ],
   bootstrap: [AppComponent]
 })
