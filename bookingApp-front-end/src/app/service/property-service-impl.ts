@@ -2,7 +2,7 @@ import {PropertyService} from "./property.service";
 import {Injectable} from "@angular/core";
 import {PropertyDto} from "../dto/property.dto";
 import {HttpClient} from "@angular/common/http";
-import {finalize} from "rxjs";
+import {finalize, Observable} from "rxjs";
 
 @Injectable()
 export class PropertyServiceImpl implements PropertyService{
@@ -18,6 +18,13 @@ export class PropertyServiceImpl implements PropertyService{
 
   }
   getAllProperty(){
+    return this.propertyList;
+  }
+  getPropertyByType(type:string):Array<PropertyDto>{
+    this.http.get<Array<PropertyDto>>(`${this.API_BASE_URL}?type=${type}`)
+      .pipe(finalize(()=> this.initialized =true))
+      .subscribe(propertyList => this.propertyList = propertyList);
+    console.log(type)
     return this.propertyList;
   }
 

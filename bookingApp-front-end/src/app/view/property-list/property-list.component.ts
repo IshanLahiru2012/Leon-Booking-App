@@ -1,5 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {PropertyService} from "../../service/property.service";
+import {PropertyDto} from "../../dto/property.dto";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-property-list',
@@ -17,6 +19,12 @@ import {PropertyService} from "../../service/property.service";
 })
 export class PropertyListComponent {
 
-  constructor(@Inject(PropertyService) public propertyService: PropertyService) {
+  protected propertyList: Array<PropertyDto> =[];
+
+  constructor(@Inject(PropertyService) public propertyService: PropertyService , private route:ActivatedRoute) {
+    this.route.params.subscribe(params =>{
+      this.propertyList = this.propertyService.getPropertyByType(params['type'])
+      console.log(this.propertyList.length)
+    })
   }
 }

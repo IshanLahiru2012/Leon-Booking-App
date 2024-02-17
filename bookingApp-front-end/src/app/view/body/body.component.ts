@@ -24,14 +24,14 @@ import {Router} from "@angular/router";
 export class BodyComponent {
 
   navigating : boolean = false;
-  propertyTypeList : string[] =['Hotels', 'Apartments', 'Resorts', 'Villas']
+  propertyTypeList : string[] =['Hotel', 'Apartment', 'Resort', 'Villa']
 
   constructor(private router: Router) {
   }
 
   handle(propertyType: string){
     this.navigating = true;
-    this.router.navigateByUrl('/property-list')
+    this.router.navigate(['/property-list',propertyType])
 
 
   }

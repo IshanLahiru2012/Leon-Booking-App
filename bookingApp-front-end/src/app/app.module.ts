@@ -28,7 +28,7 @@ const APP_ROUTES: Routes=[
     component: ImageListComponent
   },
   {
-    path:'property-list',
+    path:'property-list/:type',
     component: PropertyListComponent
   },
   {

@@ -5,4 +5,5 @@ export abstract class PropertyService {
   abstract isInitialized(): boolean;
 
   abstract getAllProperty(): Array<PropertyDto>;
+  abstract getPropertyByType(type:string):Array<PropertyDto>;
 }
