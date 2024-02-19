@@ -13,6 +13,9 @@ import {ImageListService} from "../../service/image.list.service";
         <img [src]="property.pictureList[0]" alt="Property Image" class="image hover:cursor-pointer "
              [routerLink]="['/image']" (click)="setProperty(property)">
       </div>
+      <div *ngIf="!property.pictureList" class="col-span-5 image-container border-r-2 border-amber-400 rounded-lg text-wrap  text-center ">
+        <p class="align-text-bottom">No Image to Preview</p>
+      </div>
       <div class="col-span-7 flex flex-col">
         <a class="pl-4 font-bold hover:underline hover:cursor-pointer" [routerLink]="['/image']" (click)="setProperty(property)"> {{property.name}} </a>
         <p class="text-gray-400 text-sm pl-5">{{property.city}}</p>
