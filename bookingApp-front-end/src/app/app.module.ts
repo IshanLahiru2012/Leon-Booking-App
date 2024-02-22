@@ -14,7 +14,9 @@ import {PropertyServiceImpl} from "./service/property-service-impl";
 import {HttpClientModule} from "@angular/common/http";
 import { ImageListComponent } from './view/image-list/image-list.component';
 import { RouterModule, Routes } from '@angular/router';
-import {ImageListService} from "./service/image.list.service";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatInputModule} from "@angular/material/input";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 
 const APP_ROUTES: Routes=[
@@ -48,17 +50,22 @@ const APP_ROUTES: Routes=[
     PropertyComponent,
     PropertyListComponent,
     ImageListComponent
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(APP_ROUTES)
+    RouterModule.forRoot(APP_ROUTES),
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule
 
   ],
   exports: [RouterModule],
   providers: [
-    {provide: PropertyService, useClass:PropertyServiceImpl},
+    {provide: PropertyService, useClass:PropertyServiceImpl}
+
   ],
   bootstrap: [AppComponent]
 })
