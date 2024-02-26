@@ -17,6 +17,9 @@ import { RouterModule, Routes } from '@angular/router';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatMomentDateModule} from "@angular/material-moment-adapter";
+import { LoginComponent } from './view/login/login.component';
+
 
 
 const APP_ROUTES: Routes=[
@@ -49,7 +52,8 @@ const APP_ROUTES: Routes=[
     BodyComponent,
     PropertyComponent,
     PropertyListComponent,
-    ImageListComponent
+    ImageListComponent,
+    LoginComponent
 
   ],
   imports: [
@@ -59,7 +63,8 @@ const APP_ROUTES: Routes=[
     RouterModule.forRoot(APP_ROUTES),
     MatDatepickerModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatMomentDateModule
 
   ],
   exports: [RouterModule],

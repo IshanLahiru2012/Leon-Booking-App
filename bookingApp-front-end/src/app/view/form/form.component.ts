@@ -1,5 +1,6 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 
+
 @Component({
   selector: 'app-form',
   template: `
@@ -12,13 +13,13 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
             <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
           </svg>
         </div>
-<!--        <input name="date" type="text" class="rounded-md w-full px-1">-->
-        <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="selectedDate">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <input type="text" class="rounded-md w-full px-1">
+        <input name="date" type="text" class="rounded-md w-full px-1">
+<!--        <mat-form-field class="rounded-md w-full px-1">-->
+<!--          <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="selectedDate">-->
+<!--          <mat-datepicker-toggle matSuffix [for]="picker">g</mat-datepicker-toggle>-->
+<!--          <mat-datepicker #picker></mat-datepicker>-->
+<!--        </mat-form-field>-->
+        <input type="text" class="rounded-md w-full px-1" placeholder="hello">
         <button class="border-2 px-1 bg-gradient-to-l from-emerald-500 to-cyan-400 text-gray-600 border-sky-700
                             rounded-2xl hover:border-cyan-500 active:border-white p-1">Search</button>
       </form>
