@@ -14,6 +14,7 @@ import {Router} from "@angular/router";
       </div>
 
     </header>
+    <app-form/>
   `,
   styleUrl: './header.component.scss'
 })

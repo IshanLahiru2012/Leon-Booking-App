@@ -35,6 +35,9 @@ public class Hotel implements SuperEntity{
     @ToString.Exclude
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.REMOVE)
     private List<Picture> pictureList;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     public Hotel(String name, String city, HotelType type, int chargePerNight) {
         this.name = name;

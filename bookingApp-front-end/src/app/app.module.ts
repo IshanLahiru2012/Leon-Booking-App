@@ -25,6 +25,10 @@ import { LoginComponent } from './view/login/login.component';
 const APP_ROUTES: Routes=[
 
   {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
     path: 'app',
     component: BodyComponent,
   },
