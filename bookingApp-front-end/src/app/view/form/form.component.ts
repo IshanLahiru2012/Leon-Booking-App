@@ -4,7 +4,7 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
 @Component({
   selector: 'app-form',
   template: `
-    <div class="pb-2 pt-3">
+    <div class="pb-2 pt-3 bg-blue-400">
       <form class=" flex flex-col md:flex-row gap-1 m-2 p-1 bg-amber-500 rounded-lg max-w-5xl">
         <div class="relative w-full">
           <input type="text" class="rounded-md w-full py-2 pl-10 pr-4 focus:outline-none focus:border-blue-500" placeholder="Where are you going">

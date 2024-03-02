@@ -13,39 +13,11 @@ import {PropertyService} from "./service/property.service";
 import {PropertyServiceImpl} from "./service/property-service-impl";
 import {HttpClientModule} from "@angular/common/http";
 import { ImageListComponent } from './view/image-list/image-list.component';
-import { RouterModule, Routes } from '@angular/router';
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatInputModule} from "@angular/material/input";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import { LoginComponent } from './view/login/login.component';
+import {RoutingModule} from "./routing.module";
+import { RegisterComponent } from './view/register/register.component';
+import { SigninComponent } from './view/signin/signin.component';
 
-
-
-const APP_ROUTES: Routes=[
-
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'app',
-    component: BodyComponent,
-  },
-  {
-    path: 'image',
-    component: ImageListComponent
-  },
-  {
-    path:'property-list/:type',
-    component: PropertyListComponent
-  },
-  {
-    path:'',
-    pathMatch: 'full',
-    redirectTo: '/app'
-  }
-]
 
 @NgModule({
   declarations: [
@@ -57,21 +29,18 @@ const APP_ROUTES: Routes=[
     PropertyComponent,
     PropertyListComponent,
     ImageListComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    SigninComponent
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(APP_ROUTES),
-    MatDatepickerModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatMomentDateModule
-
+    RoutingModule
   ],
-  exports: [RouterModule],
+  // exports: [RouterModule],
   providers: [
     {provide: PropertyService, useClass:PropertyServiceImpl}
 

@@ -22,14 +22,12 @@ export class PropertyListComponent implements OnInit{
 
   protected propertyList$!: Observable<PropertyDto[]>;
 
-  constructor(private propertyService: PropertyService , private route:ActivatedRoute) {
-
-  }
+  constructor(private propertyService: PropertyService , private route:ActivatedRoute) { }
   ngOnInit(){
     this.route.params.subscribe(params =>{
       const type = params['type'];
       if(type){
-        this.propertyList$ = this.propertyService.getPropertyByType(params['type'])
+        this.propertyList$ = this.propertyService.getPropertyByType(type);
       }
     })
   }

@@ -17,13 +17,12 @@ import {ImageListService} from "../../service/image.list.service";
         <span class="">No Image to Preview</span>
       </div>
       <div class="col-span-7 flex flex-col">
-        <a class="pl-4 font-bold hover:underline hover:cursor-pointer" [routerLink]="['/image']" (click)="setProperty(property)"> {{property.name}} </a>
+        <a class="pl-4 font-bold hover:underline hover:cursor-pointer" [routerLink]="['/image']" (click)="setProperty(property)"> {{property.name}}</a>
         <p class="text-gray-400 text-sm pl-5">{{property.city}}</p>
         <p class="text-gray-400 text-sm pl-5">{{property.type}}</p>
         <p class="text-right font-bold pr-2">LKR. {{property.chargePerNight}}</p>
         <p class="text-right text-xs pr-2">For tonight</p>
       </div>
-
     </div>
 
   `,
@@ -43,6 +42,4 @@ export class PropertyComponent {
   imageHandler() {
     this.router.navigateByUrl('/image')
   }
-
-  protected readonly MouseEvent = MouseEvent;
 }

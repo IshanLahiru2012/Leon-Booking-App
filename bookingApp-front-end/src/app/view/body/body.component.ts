@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-body',
   template: `
+    <app-form/>
     <ng-container *ngIf="!navigating" >
       <p class="m-2 font-bold text-amber-800 text-xl">Browse by property type</p>
       <div class="flex gap-2 border-b">
@@ -29,9 +30,9 @@ export class BodyComponent {
   constructor(private router: Router) {
   }
 
-  handle(propertyType: string){
+  handle(type: string){
     this.navigating = true;
-    this.router.navigate(['/property-list',propertyType])
+    this.router.navigate(['/property-list',type])
 
 
   }
