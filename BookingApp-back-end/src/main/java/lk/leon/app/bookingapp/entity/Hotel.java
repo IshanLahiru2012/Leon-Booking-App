@@ -26,7 +26,7 @@ public class Hotel implements SuperEntity{
     @Column(length = 100, nullable = false)
     private String city;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "ENUM('APARTMENT','RESORT','VILLA')")
+    @Column(nullable = false, columnDefinition = "ENUM('HOTEL','APARTMENT','RESORT','VILLA')")
     private HotelType type;
     @Column(name = "charge_per_night", nullable = false)
     @Positive

@@ -13,9 +13,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class UserReqTo implements Serializable {
     private int id;
+    @NotBlank(message = "name cannot be empty")
+    private String name;
     @NotBlank(message = "username cannot be empty")
     @Length(min = 3,message = "Invalid Username")
-    private String userName;
+    private String email;
     @NotBlank(message = "password cannot be empty")
     @Length(min = 4,message = "Invalid password")
     private String password;

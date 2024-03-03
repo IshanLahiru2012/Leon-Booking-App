@@ -5,7 +5,7 @@ import {LoginComponent} from "./view/login/login.component";
 import {BodyComponent} from "./view/body/body.component";
 import {PropertyListComponent} from "./view/property-list/property-list.component";
 import {RegisterComponent} from "./view/register/register.component";
-import {SigninComponent} from "./view/signin/signin.component";
+import {SignupComponent} from "./view/signup/signup.component";
 
 const APP_ROUTES: Routes=[
   {
@@ -30,7 +30,7 @@ const APP_ROUTES: Routes=[
   },
   {
     path:'signin',
-    component: SigninComponent
+    component: SignupComponent
   },
   {
     path:'',

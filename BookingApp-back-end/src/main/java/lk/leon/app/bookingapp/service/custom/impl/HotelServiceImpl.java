@@ -13,6 +13,7 @@ import lk.leon.app.bookingapp.service.util.Transformer;
 import lk.leon.app.bookingapp.to.HotelTo;
 import lk.leon.app.bookingapp.to.request.HotelReqTo;
 import lk.leon.app.bookingapp.util.HotelType;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,19 +27,13 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class HotelServiceImpl implements HotelService {
 
     private final HotelRepository hotelRepository;
     private final PictureRepository pictureRepository;
     private final Transformer transformer;
     private final Bucket bucket;
-
-    public HotelServiceImpl(HotelRepository hotelRepository, PictureRepository pictureRepository, Transformer transformer, Bucket bucket) {
-        this.hotelRepository = hotelRepository;
-        this.pictureRepository = pictureRepository;
-        this.transformer = transformer;
-        this.bucket = bucket;
-    }
 
     @Override
     public HotelTo saveHotel(HotelReqTo hotelReqTo){
@@ -79,7 +74,7 @@ public class HotelServiceImpl implements HotelService {
 
         for (int i = 0; i < pictureList.size(); i++) {
             try {
-                Picture picture = new Picture("hotel/" + hotel.getId() + "/" + i, hotel);
+                Picture picture = new Picture("hotel/" + hotel.getId() + "image/" + i, hotel);
                 pictureRepository.save(picture);
                 Blob blob = bucket.create(picture.getPicturePath(), pictureList.get(i).getInputStream(), pictureList.get(i).getContentType());
                 urlList.add(blob.signUrl(1,TimeUnit.DAYS, Storage.SignUrlOption.withV4Signature()).toString());
@@ -120,7 +115,7 @@ public class HotelServiceImpl implements HotelService {
                 .orElseThrow(() -> new RuntimeException("No hotel associated with the id"));
         HotelTo hotelTo = transformer.toHotelTo(hotel);
         if(hotel.getPictureList() != null && hotel.getPictureList().size()> 0){
-            return hotelWithImage(hotel.getPictureList(), hotel, hotelTo);
+            return hotelWithImage(hotel, hotelTo);
         }
         return hotelTo;
     }
@@ -132,17 +127,17 @@ public class HotelServiceImpl implements HotelService {
         List<HotelTo> hotelTos = hotelList.stream().map(hotel -> {
             HotelTo hotelTo = transformer.toHotelTo(hotel);
             if(hotel.getPictureList() != null && hotel.getPictureList().size()> 0){
-                return hotelWithImage(hotel.getPictureList(), hotel, hotelTo);
+                return hotelWithImage(hotel, hotelTo);
             }
             return hotelTo;
         }).collect(Collectors.toList());
         return hotelTos;
     }
 
-    public HotelTo hotelWithImage(List<Picture> pictureList, Hotel hotel, HotelTo hotelTo){
+    public HotelTo hotelWithImage(Hotel hotel, HotelTo hotelTo){
         List<String> imageList = new ArrayList<>();
         if (hotel.getPictureList() != null) {
-            Iterable<Blob> blobs = bucket.list(Storage.BlobListOption.prefix("hotel/" + hotel.getId())).iterateAll();
+            Iterable<Blob> blobs = bucket.list(Storage.BlobListOption.prefix("hotel/" + hotel.getId()+"image")).iterateAll();
             for (Blob blob : blobs) {
                 imageList.add(blob.signUrl(1, TimeUnit.DAYS, Storage.SignUrlOption.withV4Signature()).toString());
             }

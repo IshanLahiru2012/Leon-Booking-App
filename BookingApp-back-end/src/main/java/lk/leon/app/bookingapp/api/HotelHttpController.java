@@ -8,6 +8,7 @@ import lk.leon.app.bookingapp.to.request.UserReqTo;
 import lk.leon.app.bookingapp.util.HotelType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,12 +28,6 @@ public class HotelHttpController {
     @PostMapping(consumes = "multipart/form-data", produces = "application/json")
     public HotelTo createNewHotel(@ModelAttribute @Validated HotelReqTo hotelReqTo){
         return hotelService.saveHotel(hotelReqTo);
-    }
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/users")
-    public String test(@Validated UserReqTo userReqTo){
-        System.out.println("awa");
-        return "no";
     }
 
     @GetMapping(value = "/{hotel-id}", produces = "application/json")
