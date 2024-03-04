@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/auths")
+@CrossOrigin
 public class AuthHttpController {
 
     @Autowired

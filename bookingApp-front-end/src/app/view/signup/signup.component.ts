@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../service/auth.service";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signin',
@@ -15,16 +18,16 @@ import {FormGroup} from "@angular/forms";
               </div>
             </div>
 
-            <form nz-form>
+            <form nz-form [formGroup]="signupForm">
               <nz-form-item>
                 <nz-form-control nzHasFeedback nzErrorTip="enter email is not valid">
-                  <input nz-input placeholder="email" id="email"/>
+                  <input nz-input placeholder="email" id="email" formControlName="email"/>
                 </nz-form-control>
               </nz-form-item>
 
               <nz-form-item>
                 <nz-form-control nzHasFeedback [nzErrorTip]="errorPass">
-                  <input nz-input placeholder="password" id="password"/>
+                  <input nz-input type="password" placeholder="password" id="password" formControlName="password"/>
                   <ng-template #errorPass let-control>
                     <ng-container *ngIf="control.hasError('required')">
                       password is required
@@ -38,7 +41,7 @@ import {FormGroup} from "@angular/forms";
 
               <nz-form-item>
                 <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl" >
-                  <input nz-input placeholder="password" id="password"/>
+                  <input nz-input type="password" placeholder="password" id="confirmPassword" formControlName="confirmPassword"/>
                   <ng-template #errorTpl let-control>
                     <ng-container *ngIf="control.hasError('required')">
                       please enter again password
@@ -52,7 +55,7 @@ import {FormGroup} from "@angular/forms";
 
               <nz-form-item>
                 <nz-form-control nzHasFeedback [nzErrorTip]="errorUser">
-                  <input nz-input placeholder="Name" id="username"/>
+                  <input nz-input placeholder="Name" id="username" formControlName="name"/>
                   <ng-template #errorUser let-control>
                     <ng-container *ngIf="control.hasError('required')">
                       please enter username
@@ -61,7 +64,7 @@ import {FormGroup} from "@angular/forms";
                 </nz-form-control>
               </nz-form-item>
 
-              <button nz-button class="login-form-btn login-form-margin" [nzType]="'primary'">Register</button>
+              <button nz-button class="login-form-btn login-form-margin" [disabled]="signupForm.invalid" (click)="register()" [nzType]="'primary'">Register</button>
               or <a routerLink="/login">Login now</a>
             </form>
           </div>
@@ -76,6 +79,43 @@ import {FormGroup} from "@angular/forms";
 export class SignupComponent {
   isSpining: boolean =false;
   signupForm!:FormGroup;
+
+
+  constructor(
+    private fb:FormBuilder,
+    private authService:AuthService,
+    private message: NzMessageService,
+    private router:Router) {
+  }
+
+  ngOnInit(){
+    this.signupForm = this.fb.group({
+      name:[null,[Validators.required]],
+      email:[null,[Validators.required, Validators.email]],
+      password:[null,[Validators.required]],
+      confirmPassword:[null,[Validators.required , this.passwordMatch]]
+    })
+  }
+  passwordMatch =(control: FormControl):{[s:string]: boolean}=>{
+    if(!control.value){
+      return {required:true};
+    }else if (control.value !== this.signupForm.controls['password'].value){
+      return {confirm:true, error:true};
+    }
+    return {}
+  }
+  register(){
+    console.log(this.signupForm.value)
+    this.authService.register(this.signupForm.value).subscribe((resp)=>{
+      console.log(resp);
+      if(resp.id != null){
+        this.message.success("signUp succesful",{nzDuration:5000});
+        this.router.navigateByUrl("/login")
+      }else {
+        this.message.error("Something went wrong", {nzDuration:5000});
+      }
+    })
+  }
 
 
 }

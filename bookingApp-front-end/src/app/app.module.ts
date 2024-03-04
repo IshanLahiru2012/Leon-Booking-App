@@ -17,12 +17,11 @@ import { LoginComponent } from './view/login/login.component';
 import {RoutingModule} from "./routing.module";
 import { RegisterComponent } from './view/register/register.component';
 import { SignupComponent } from './view/signup/signup.component';
-import {NzFormControlComponent, NzFormDirective, NzFormItemComponent} from "ng-zorro-antd/form";
-import {NzInputDirective, NzInputGroupComponent, NzInputModule} from "ng-zorro-antd/input";
-import {NzButtonComponent} from "ng-zorro-antd/button";
-import {NzSpinComponent} from "ng-zorro-antd/spin";
-import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
-import {NzCheckboxComponent} from "ng-zorro-antd/checkbox";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {NgZorroImportModule} from "./ng-zorro-import.module";
+
+
+
 
 
 @NgModule({
@@ -45,20 +44,11 @@ import {NzCheckboxComponent} from "ng-zorro-antd/checkbox";
     FormsModule,
     HttpClientModule,
     RoutingModule,
-    NzFormControlComponent,
-    NzFormItemComponent,
-    NzInputDirective,
-    NzFormDirective,
-    NzButtonComponent,
-    NzSpinComponent,
-    NzRowDirective,
-    NzColDirective,
     ReactiveFormsModule,
-    NzInputGroupComponent,
-    NzCheckboxComponent,
-    NzInputModule
+    BrowserAnimationsModule,
+    NgZorroImportModule
   ],
-  // exports: [RouterModule],
+
   providers: [
     {provide: PropertyService, useClass:PropertyServiceImpl}
 
