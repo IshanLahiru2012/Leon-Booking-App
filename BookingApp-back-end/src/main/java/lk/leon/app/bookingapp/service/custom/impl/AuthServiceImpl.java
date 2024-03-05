@@ -8,6 +8,7 @@ import lk.leon.app.bookingapp.to.request.UserReqTo;
 import lk.leon.app.bookingapp.util.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,7 +25,7 @@ public class AuthServiceImpl implements AuthService {
         User user = new User();
         user.setName(userReqTo.getName());
         user.setEmail(userReqTo.getEmail());
-        user.setPassword(userReqTo.getPassword());
+        user.setPassword(new BCryptPasswordEncoder().encode(userReqTo.getPassword()));
         user.setUserRole(UserRole.CUSTOMER);
         User registeredUser = userRepository.save(user);
         UserTo userTo = new UserTo();
