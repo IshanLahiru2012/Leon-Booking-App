@@ -7,7 +7,7 @@ import {BehaviorSubject, finalize, Observable, tap} from "rxjs";
 @Injectable()
 export class PropertyServiceImpl implements PropertyService{
 
-  private readonly API_BASE_URL = 'http://localhost:8080/api/v1/hotels'
+  private readonly API_BASE_URL = 'http://localhost:8080/api/v1/properties'
   private propertyList$: BehaviorSubject<PropertyDto[]> = new BehaviorSubject<PropertyDto[]>([])
   private initialized = false;
 

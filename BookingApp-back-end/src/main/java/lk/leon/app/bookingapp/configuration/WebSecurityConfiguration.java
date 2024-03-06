@@ -1,6 +1,6 @@
 package lk.leon.app.bookingapp.configuration;
 
-import lk.leon.app.bookingapp.service.jwt.UserService;
+import lk.leon.app.bookingapp.service.custom.UserService;
 import lk.leon.app.bookingapp.util.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -33,9 +33,11 @@ public class WebSecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(req ->
                 req.antMatchers("/api/v1/auths/**").permitAll()
                         .antMatchers("/api/v1/admin/**").hasAnyAuthority(UserRole.ADMIN.name())
+                        .antMatchers("/api/v1/properties/**").permitAll()
                         .antMatchers("/api/v1/customers/**").hasAnyAuthority(UserRole.CUSTOMER.name())
                         .anyRequest().authenticated()).sessionManagement(manager ->
-                manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProvider())
+                manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
 

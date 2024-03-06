@@ -7,6 +7,7 @@ import lk.leon.app.bookingapp.to.request.UserReqTo;
 public interface AuthService extends SuperService {
 
     UserTo registerUser(UserReqTo userReqTo);
+    UserTo registerAdmin(UserReqTo userReqTo);
 
     boolean existUser(String email);
     void updateUser(UserReqTo userReqTo);

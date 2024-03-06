@@ -18,11 +18,11 @@ public class Picture implements SuperEntity{
     @Column(nullable = false)
     private String picturePath;
     @ManyToOne
-    @JoinColumn(name = "hotel_id", referencedColumnName = "id")
-    private Hotel hotel;
+    @JoinColumn(name = "property_id", referencedColumnName = "id")
+    private Property property;
 
-    public Picture(String picturePath, Hotel hotel) {
+    public Picture(String picturePath, Property property) {
         this.picturePath = picturePath;
-        this.hotel = hotel;
+        this.property = property;
     }
 }

@@ -6,11 +6,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class HotelImageConstraintValidator implements ConstraintValidator<HotelImage, List<MultipartFile>> {
+public class PropertyImageConstraintValidator implements ConstraintValidator<PropertyImage, List<MultipartFile>> {
 
     private long maximumFileSize;
     @Override
-    public void initialize(HotelImage constraintAnnotation) {
+    public void initialize(PropertyImage constraintAnnotation) {
         maximumFileSize = constraintAnnotation.maximumFileSize();
     }
 

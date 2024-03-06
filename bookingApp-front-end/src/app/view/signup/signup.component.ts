@@ -21,13 +21,15 @@ import {Router} from "@angular/router";
             <form nz-form [formGroup]="signupForm">
               <nz-form-item>
                 <nz-form-control nzHasFeedback nzErrorTip="enter email is not valid">
-                  <input nz-input placeholder="email" id="email" formControlName="email"/>
+                  <label for="email">E-mail</label>
+                  <input nz-input placeholder="Please Enter E-mail" id="email" formControlName="email"/>
                 </nz-form-control>
               </nz-form-item>
 
               <nz-form-item>
                 <nz-form-control nzHasFeedback [nzErrorTip]="errorPass">
-                  <input nz-input type="password" placeholder="password" id="password" formControlName="password"/>
+                  <label for="password">Password</label>
+                  <input nz-input type="password" placeholder="Please Enter Password" id="password" formControlName="password"/>
                   <ng-template #errorPass let-control>
                     <ng-container *ngIf="control.hasError('required')">
                       password is required
@@ -41,7 +43,8 @@ import {Router} from "@angular/router";
 
               <nz-form-item>
                 <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl" >
-                  <input nz-input type="password" placeholder="password" id="confirmPassword" formControlName="confirmPassword"/>
+                  <label for="confirmPassword">Confirm Password</label>
+                  <input nz-input type="password" placeholder="Please Enter Password" id="confirmPassword" formControlName="confirmPassword"/>
                   <ng-template #errorTpl let-control>
                     <ng-container *ngIf="control.hasError('required')">
                       please enter again password
@@ -55,12 +58,15 @@ import {Router} from "@angular/router";
 
               <nz-form-item>
                 <nz-form-control nzHasFeedback [nzErrorTip]="errorUser">
-                  <input nz-input placeholder="Name" id="username" formControlName="name"/>
-                  <ng-template #errorUser let-control>
-                    <ng-container *ngIf="control.hasError('required')">
-                      please enter username
-                    </ng-container>
-                  </ng-template>
+                  <label for="userRole">User Role</label>
+                  <nz-select nzPlaceHolder="please Select User Role" nzId="userRole" formControlName="name">
+                    <nz-option *ngFor="let role of listOfRole" nzLabel="{{role}}" nzValue="{{role}}" ></nz-option>
+                    <ng-template #errorUser let-control>
+                      <ng-container *ngIf="control.hasError('required')">
+                        please enter User Role
+                      </ng-container>
+                    </ng-template>
+                  </nz-select>
                 </nz-form-control>
               </nz-form-item>
 
@@ -79,6 +85,7 @@ import {Router} from "@angular/router";
 export class SignupComponent {
   isSpining: boolean =false;
   signupForm!:FormGroup;
+  listOfRole = ["Admin","User"];
 
 
   constructor(

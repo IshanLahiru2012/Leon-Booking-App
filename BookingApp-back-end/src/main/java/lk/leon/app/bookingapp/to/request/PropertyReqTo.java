@@ -1,8 +1,7 @@
 package lk.leon.app.bookingapp.to.request;
 
-import lk.leon.app.bookingapp.entity.Picture;
-import lk.leon.app.bookingapp.util.HotelType;
-import lk.leon.app.bookingapp.validation.HotelImage;
+import lk.leon.app.bookingapp.util.PropertyType;
+import lk.leon.app.bookingapp.validation.PropertyImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class HotelReqTo implements Serializable {
+public class PropertyReqTo implements Serializable {
     private Integer id;
     @NotBlank(message = "Name cannot be empty")
     @Pattern(regexp = "^[A-Za-z ]{2,}$", message = "Invalid name")
@@ -27,9 +26,9 @@ public class HotelReqTo implements Serializable {
     private String city;
     @NotNull(message = "Type should be either 'resort', 'apartment', 'villa'  ")
     @Enumerated(EnumType.STRING)
-    private HotelType type;
+    private PropertyType type;
     @Positive(message = "charges cannot be negative")
     private int chargePerNight;
-    @HotelImage()
+    @PropertyImage()
     private List<MultipartFile> pictureList;
 }

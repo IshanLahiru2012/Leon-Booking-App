@@ -38,14 +38,14 @@ public class JWTUtil {
     private String generateToken(Map<String,Object> extractClaims, UserDetails userDetails){
         return Jwts.builder().setClaims(extractClaims).setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()*1000*60*24))
+                .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*24))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
     }
 
     public String generateRefreshToken(Map<String, Object> extractClaims, UserDetails userDetails){
         return Jwts.builder().setClaims(extractClaims).setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 604800000))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000*60*60*24*7))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
     }
     private boolean isTokenExpired(String token){
@@ -60,7 +60,7 @@ public class JWTUtil {
     }
 
     private Key getSigningKey(){
-        byte[] keyBytes = Decoders.BASE64.decode("");
+        byte[] keyBytes = Decoders.BASE64.decode("AFQ45TQRE34Y545W2334QFASFVAEFERHE454W4W5GWHSTWSRAWEAWdxasx");
         return Keys.hmacShaKeyFor(keyBytes);
     }
 

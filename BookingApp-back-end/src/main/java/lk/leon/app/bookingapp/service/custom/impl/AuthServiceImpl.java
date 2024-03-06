@@ -23,16 +23,19 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public UserTo registerUser(UserReqTo userReqTo) {
         User user = new User();
-        user.setName(userReqTo.getName());
         user.setEmail(userReqTo.getEmail());
         user.setPassword(new BCryptPasswordEncoder().encode(userReqTo.getPassword()));
         user.setUserRole(UserRole.CUSTOMER);
         User registeredUser = userRepository.save(user);
         UserTo userTo = new UserTo();
         userTo.setId(registeredUser.getId());
-        userTo.setName(registeredUser.getName());
         userTo.setEmail(registeredUser.getEmail());
         return userTo;
+    }
+
+    @Override
+    public UserTo registerAdmin(UserReqTo userReqTo) {
+        return userRepository.save();
     }
 
     @Override

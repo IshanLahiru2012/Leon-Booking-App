@@ -1,9 +1,7 @@
 package lk.leon.app.bookingapp.configuration;
 
-import io.netty.util.internal.StringUtil;
-import lk.leon.app.bookingapp.service.jwt.UserService;
+import lk.leon.app.bookingapp.service.custom.UserService;
 import lk.leon.app.bookingapp.util.JWTUtil;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;

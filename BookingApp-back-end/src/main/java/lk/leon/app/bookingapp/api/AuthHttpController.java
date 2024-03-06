@@ -3,14 +3,13 @@ package lk.leon.app.bookingapp.api;
 import lk.leon.app.bookingapp.entity.User;
 import lk.leon.app.bookingapp.repository.UserRepository;
 import lk.leon.app.bookingapp.service.custom.AuthService;
-import lk.leon.app.bookingapp.service.jwt.UserService;
+import lk.leon.app.bookingapp.service.custom.UserService;
 import lk.leon.app.bookingapp.to.AuthRespTo;
 import lk.leon.app.bookingapp.to.UserTo;
 import lk.leon.app.bookingapp.to.request.AuthReqTo;
 import lk.leon.app.bookingapp.to.request.UserReqTo;
 import lk.leon.app.bookingapp.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,14 +38,15 @@ public class AuthHttpController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerNewUser(@RequestBody @Validated UserReqTo userReqTo){
-        if(authService.existUser(userReqTo.getEmail()))return
-                new ResponseEntity<>("User already Exist with "+userReqTo.getEmail()+", try agin using another email...!",HttpStatus.NOT_ACCEPTABLE);;
+        if(authService.existUser(userReqTo.getEmail()))
+            return new ResponseEntity<>("User already Exist with "+userReqTo.getEmail()+", try agin using another email...!",HttpStatus.NOT_ACCEPTABLE);;
         UserTo registeredUser = authService.registerUser(userReqTo);
-        if(registeredUser == null) return
-                new ResponseEntity<>("User not created, try agin...!",HttpStatus.BAD_REQUEST);
+        if(registeredUser == null)
+            return new ResponseEntity<>("User not created, try agin...!",HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(registeredUser,HttpStatus.CREATED);
 
     }
+    @PostMapping("/login")
     public AuthRespTo authenticationResponse(@RequestBody AuthReqTo authenticationRequest)
             throws BadCredentialsException, DisabledException, UsernameNotFoundException {
         try {
@@ -65,6 +65,7 @@ public class AuthHttpController {
             authRespTo.setUserRole(optionalUser.get().getUserRole());
         }
         return authRespTo;
+
     }
 
 }

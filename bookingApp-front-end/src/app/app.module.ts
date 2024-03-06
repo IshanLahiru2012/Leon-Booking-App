@@ -19,6 +19,7 @@ import { RegisterComponent } from './view/register/register.component';
 import { SignupComponent } from './view/signup/signup.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgZorroImportModule} from "./ng-zorro-import.module";
+import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
 
 
 
@@ -46,7 +47,9 @@ import {NgZorroImportModule} from "./ng-zorro-import.module";
     RoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgZorroImportModule
+    NgZorroImportModule,
+    NzOptionComponent,
+    NzSelectComponent
   ],
 
   providers: [

@@ -13,5 +13,8 @@ export class AuthService {
   register(signUpReq: any):Observable<any>{
     return this.http.post(this.API_BASE_URL+"/signup", signUpReq)
   }
+  login(loginReq: any):Observable<any>{
+    return this.http.post(this.API_BASE_URL+"/login", loginReq);
+  }
 
 }

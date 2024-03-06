@@ -1,0 +1,19 @@
+package lk.leon.app.bookingapp.service.custom;
+
+import lk.leon.app.bookingapp.service.SuperService;
+import lk.leon.app.bookingapp.to.PropertyTo;
+import lk.leon.app.bookingapp.to.request.PropertyReqTo;
+import lk.leon.app.bookingapp.util.PropertyType;
+
+import java.util.List;
+
+public interface PropertyService extends SuperService {
+
+    PropertyTo saveProperty(PropertyReqTo propertyReqTo);
+    void updatePropertyViaMultipart(PropertyReqTo propertyReqTo);
+    void updateHotelViaJson(PropertyTo propertyTo);
+    void deleteProperty(Integer hotelId);
+    PropertyTo getPropertyDetails(Integer hotelId);
+    List<PropertyTo> getProperties(PropertyType type);
+
+}

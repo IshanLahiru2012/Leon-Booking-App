@@ -1,12 +1,10 @@
 package lk.leon.app.bookingapp.service.util;
 
-import lk.leon.app.bookingapp.entity.Hotel;
+import lk.leon.app.bookingapp.entity.Property;
 import lk.leon.app.bookingapp.entity.Picture;
-import lk.leon.app.bookingapp.to.HotelTo;
-import lk.leon.app.bookingapp.to.request.HotelReqTo;
+import lk.leon.app.bookingapp.to.PropertyTo;
+import lk.leon.app.bookingapp.to.request.PropertyReqTo;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,22 +21,23 @@ public class Transformer {
         modelMapper.typeMap(MultipartFile.class, Picture.class).setConverter(ctc -> null);
     }
 
-    public Hotel fromHotelReqTo(HotelReqTo hotelReqTo){
-        Hotel hotel = modelMapper.map(hotelReqTo, Hotel.class);
-        hotel.setPictureList(null);
-        return hotel;
+    public Property fromPropertyReqTo(PropertyReqTo propertyReqTo){
+        Property property = modelMapper.map(propertyReqTo, Property.class);
+        property.setPictureList(null);
+        return property;
     }
-    public Hotel fromHotelTo(HotelTo hotelTo){
-        Hotel hotel = modelMapper.map(hotelTo, Hotel.class);
-        hotel.setPictureList(null);
-        return hotel;
+    public Property fromPropertyTo(PropertyTo propertyTo){
+        Property property = modelMapper.map(propertyTo, Property.class);
+        property.setPictureList(null);
+        return property;
     }
-    public HotelTo toHotelTo(Hotel hotel){
-        HotelTo hotelTo = modelMapper.map(hotel, HotelTo.class);
-        hotelTo.setPictureList(null);
-        return hotelTo;
+    public PropertyTo toPropertyTo(Property property){
+        PropertyTo propertyTo = modelMapper.map(property, PropertyTo.class);
+        propertyTo.setPictureList(null);
+        return propertyTo;
     }
-    public List<HotelTo> toHotelTo(List<Hotel> hotelList){
-        return hotelList.stream().map(hotel -> modelMapper.map(hotel, HotelTo.class)).collect(Collectors.toList());
+    public List<PropertyTo> toPropertyTo(List<Property> propertyList){
+        return propertyList.stream().map(hotel -> modelMapper.map(hotel, PropertyTo.class)).collect(Collectors.toList());
     }
+    public
 }

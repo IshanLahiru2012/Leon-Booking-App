@@ -1,6 +1,7 @@
-package lk.leon.app.bookingapp.service.jwt;
+package lk.leon.app.bookingapp.service.custom.impl;
 
 import lk.leon.app.bookingapp.repository.UserRepository;
+import lk.leon.app.bookingapp.service.custom.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     @Override

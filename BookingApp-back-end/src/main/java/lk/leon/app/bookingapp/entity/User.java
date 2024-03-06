@@ -23,8 +23,6 @@ public class User implements SuperEntity, UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(length = 100, nullable = false)
-    private String name;
-    @Column(length = 100, nullable = false)
     private String email;
     @Column(length = 100, nullable = false)
     private String password;
@@ -34,7 +32,7 @@ public class User implements SuperEntity, UserDetails {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<Hotel> hotelList;
+    private List<Property> propertyList;
 
 
     @Override

@@ -10,8 +10,8 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = HotelImageConstraintValidator.class)
-public @interface HotelImage {
+@Constraint(validatedBy = PropertyImageConstraintValidator.class)
+public @interface PropertyImage {
     long maximumFileSize() default 1024*1024*3 ;
     String message() default "Invalid image file or exceeds the maximum file size {maximumFileSize} kb";
 

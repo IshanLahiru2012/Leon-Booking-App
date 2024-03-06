@@ -1,4 +1,4 @@
-package lk.leon.app.bookingapp.service.jwt;
+package lk.leon.app.bookingapp.service.custom;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
