@@ -5,6 +5,8 @@ import {LoginComponent} from "./view/login/login.component";
 import {BodyComponent} from "./view/body/body.component";
 import {PropertyListComponent} from "./view/property-list/property-list.component";
 import {SignupComponent} from "./view/signup/signup.component";
+import {MainComponent} from "./view/main/main.component";
+import {ListedPropertyComponent} from "./view/listed-property/listed-property.component";
 
 const APP_ROUTES: Routes=[
   {
@@ -13,6 +15,14 @@ const APP_ROUTES: Routes=[
   },
   {
     path: 'app',
+    component: MainComponent,
+  },
+  {
+    path:'listed-property',
+    component:ListedPropertyComponent
+  },
+  {
+    path: 'body',
     component: BodyComponent,
   },
   {

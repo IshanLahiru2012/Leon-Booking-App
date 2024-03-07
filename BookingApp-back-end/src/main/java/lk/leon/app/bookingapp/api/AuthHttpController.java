@@ -38,8 +38,9 @@ public class AuthHttpController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerNewUser(@RequestBody @Validated UserReqTo userReqTo){
-        if(authService.existUser(userReqTo.getEmail()))
-            return new ResponseEntity<>("User already Exist with "+userReqTo.getEmail()+", try agin using another email...!",HttpStatus.NOT_ACCEPTABLE);;
+        if(authService.existUser(userReqTo.getEmail())){
+            return new ResponseEntity<>("User already Exist with "+userReqTo.getEmail()+", try agin using another email...!",HttpStatus.NOT_ACCEPTABLE);
+        }
         UserTo registeredUser = authService.registerUser(userReqTo);
         if(registeredUser == null)
             return new ResponseEntity<>("User not created, try agin...!",HttpStatus.BAD_REQUEST);

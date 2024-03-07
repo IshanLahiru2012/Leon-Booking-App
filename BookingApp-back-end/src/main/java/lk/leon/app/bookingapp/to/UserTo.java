@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 public class UserTo {
     private int id;
     @NotBlank(message = "name cannot be empty")
-    private String name;
+    private String userRole;
     @NotBlank(message = "username cannot be empty")
     @Length(min = 3,message = "Invalid Username")
     private String email;

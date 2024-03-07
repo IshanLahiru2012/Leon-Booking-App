@@ -29,6 +29,12 @@ export class PropertyServiceImpl implements PropertyService{
       .pipe(finalize(()=> this.initialized =true))
 
   }
+  getPropertyByUserId(id:number):Observable<PropertyDto[]>{
+    return  this.http.get<Array<PropertyDto>>(`${this.API_BASE_URL}/user?id=${id}`)
+      .pipe(finalize(()=> this.initialized =true))
+
+  }
+
 
   isInitialized(): boolean {
     return false;

@@ -34,7 +34,7 @@ public class Property implements SuperEntity{
     @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE)
     private List<Picture> pictureList;
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id" , nullable = false)
     private User user;
 
     public Property(String name, String city, PropertyType type, int chargePerNight) {

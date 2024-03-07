@@ -15,5 +15,6 @@ public interface PropertyService extends SuperService {
     void deleteProperty(Integer hotelId);
     PropertyTo getPropertyDetails(Integer hotelId);
     List<PropertyTo> getProperties(PropertyType type);
+    List<PropertyTo> getProperties(Integer id);
 
 }

@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './view/main/main.component';
-import { HeaderComponent } from './view/header/header.component';
 import { FormComponent } from './view/form/form.component';
 import { BodyComponent } from './view/body/body.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -15,11 +14,11 @@ import {HttpClientModule} from "@angular/common/http";
 import { ImageListComponent } from './view/image-list/image-list.component';
 import { LoginComponent } from './view/login/login.component';
 import {RoutingModule} from "./routing.module";
-import { RegisterComponent } from './view/register/register.component';
 import { SignupComponent } from './view/signup/signup.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgZorroImportModule} from "./ng-zorro-import.module";
 import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
+import { ListedPropertyComponent } from './view/listed-property/listed-property.component';
 
 
 
@@ -29,15 +28,14 @@ import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
   declarations: [
     AppComponent,
     MainComponent,
-    HeaderComponent,
     FormComponent,
     BodyComponent,
     PropertyComponent,
     PropertyListComponent,
     ImageListComponent,
     LoginComponent,
-    RegisterComponent,
-    SignupComponent
+    SignupComponent,
+    ListedPropertyComponent
 
   ],
   imports: [

@@ -47,6 +47,10 @@ public class PropertyHttpController {
     public List<PropertyTo> getPropertyByType(@RequestParam(required = false) PropertyType type){
         return propertyService.getProperties(type);
     }
+    @GetMapping(value ="/user" ,produces = "application/json")
+    public List<PropertyTo> getPropertyByUserId(@RequestParam(required = false) Integer id){
+        return propertyService.getProperties(id);
+    }
 
 
 

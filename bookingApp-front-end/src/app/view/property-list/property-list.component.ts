@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PropertyService} from "../../service/property.service";
 import {PropertyDto} from "../../dto/property.dto";
 import {ActivatedRoute} from "@angular/router";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
+import {StorageService} from "../../service/storage.service";
 
 @Component({
   selector: 'app-property-list',
@@ -14,21 +15,26 @@ import {Observable} from "rxjs";
         </div>
       </div>
     </div>
-
   `,
   styleUrl: './property-list.component.scss'
 })
 export class PropertyListComponent implements OnInit{
 
   protected propertyList$!: Observable<PropertyDto[]>;
-
+  private routeSubscription! : Subscription;
+  private storageService = StorageService;
   constructor(private propertyService: PropertyService , private route:ActivatedRoute) { }
   ngOnInit(){
-    this.route.params.subscribe(params =>{
+    this.routeSubscription = this.route.params.subscribe(params => {
       const type = params['type'];
       if(type){
         this.propertyList$ = this.propertyService.getPropertyByType(type);
       }
-    })
+    });
+  }
+  ngOnDestroy():void{
+    if(this.routeSubscription){
+      this.routeSubscription.unsubscribe();
+    }
   }
 }

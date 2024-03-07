@@ -1,7 +1,7 @@
 package lk.leon.app.bookingapp.util;
 
 public enum UserRole {
-    ADMIN("admin"),CUSTOMER("customer");
+    ADMIN("admin"),CLIENT("client");
 
     private String type;
 

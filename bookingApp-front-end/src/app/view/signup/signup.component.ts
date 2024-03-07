@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   selector: 'app-signin',
   template: `
 
-    <div class="bg" style="background-color: azure">
+    <div>
       <nz-spin [nzSpinning]="isSpining" [nzSize]="'large'" nzTip="Working...">
         <div class="parent">
           <div class="child">
@@ -19,16 +19,16 @@ import {Router} from "@angular/router";
             </div>
 
             <form nz-form [formGroup]="signupForm">
+              <label for="email">E-mail</label>
               <nz-form-item>
                 <nz-form-control nzHasFeedback nzErrorTip="enter email is not valid">
-                  <label for="email">E-mail</label>
-                  <input nz-input placeholder="Please Enter E-mail" id="email" formControlName="email"/>
+                  <input nz-input placeholder="Please Enter E-mail" id="email" formControlName="email" autocomplete="email"/>
                 </nz-form-control>
               </nz-form-item>
 
+              <label for="password">Password</label>
               <nz-form-item>
                 <nz-form-control nzHasFeedback [nzErrorTip]="errorPass">
-                  <label for="password">Password</label>
                   <input nz-input type="password" placeholder="Please Enter Password" id="password" formControlName="password"/>
                   <ng-template #errorPass let-control>
                     <ng-container *ngIf="control.hasError('required')">
@@ -41,9 +41,9 @@ import {Router} from "@angular/router";
                 </nz-form-control>
               </nz-form-item>
 
+              <label for="confirmPassword">Confirm Password</label>
               <nz-form-item>
                 <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl" >
-                  <label for="confirmPassword">Confirm Password</label>
                   <input nz-input type="password" placeholder="Please Enter Password" id="confirmPassword" formControlName="confirmPassword"/>
                   <ng-template #errorTpl let-control>
                     <ng-container *ngIf="control.hasError('required')">
@@ -56,10 +56,10 @@ import {Router} from "@angular/router";
                 </nz-form-control>
               </nz-form-item>
 
+              <label for="userRole">User Role</label>
               <nz-form-item>
                 <nz-form-control nzHasFeedback [nzErrorTip]="errorUser">
-                  <label for="userRole">User Role</label>
-                  <nz-select nzPlaceHolder="please Select User Role" nzId="userRole" formControlName="name">
+                  <nz-select nzPlaceHolder="please Select User Role" nzId="userRole" formControlName="userRole">
                     <nz-option *ngFor="let role of listOfRole" nzLabel="{{role}}" nzValue="{{role}}" ></nz-option>
                     <ng-template #errorUser let-control>
                       <ng-container *ngIf="control.hasError('required')">
@@ -70,7 +70,8 @@ import {Router} from "@angular/router";
                 </nz-form-control>
               </nz-form-item>
 
-              <button nz-button class="login-form-btn login-form-margin" [disabled]="signupForm.invalid" (click)="register()" [nzType]="'primary'">Register</button>
+              <button nz-button class="login-form-btn login-form-margin" [disabled]="signupForm.invalid"
+                      (click)="register()" [nzType]="'primary'">Register</button>
               or <a routerLink="/login">Login now</a>
             </form>
           </div>
@@ -85,7 +86,7 @@ import {Router} from "@angular/router";
 export class SignupComponent {
   isSpining: boolean =false;
   signupForm!:FormGroup;
-  listOfRole = ["Admin","User"];
+  listOfRole = ["ADMIN","CLIENT"];
 
 
   constructor(
@@ -97,7 +98,7 @@ export class SignupComponent {
 
   ngOnInit(){
     this.signupForm = this.fb.group({
-      name:[null,[Validators.required]],
+      userRole:[null,[Validators.required]],
       email:[null,[Validators.required, Validators.email]],
       password:[null,[Validators.required]],
       confirmPassword:[null,[Validators.required , this.passwordMatch]]
@@ -112,16 +113,22 @@ export class SignupComponent {
     return {}
   }
   register(){
-    console.log(this.signupForm.value)
-    this.authService.register(this.signupForm.value).subscribe((resp)=>{
+    this.isSpining = true;
+    this.authService.register(this.signupForm.value).subscribe(
+      (resp)=>{
+        this.isSpining =false
       console.log(resp);
-      if(resp.id != null){
-        this.message.success("signUp succesful",{nzDuration:5000});
+      if(resp.id != null) {
+        this.message.success("signUp succesful", {nzDuration: 3000});
         this.router.navigateByUrl("/login")
       }else {
-        this.message.error("Something went wrong", {nzDuration:5000});
+        this.message.error("Something went wrong", {nzDuration:3000});
       }
-    })
+    },
+      (error)=>{
+      this.message.error("Entered email already exist", {nzDuration:3000});
+
+      });
   }
 
 

@@ -7,6 +7,7 @@ import lk.leon.app.bookingapp.entity.Property;
 import lk.leon.app.bookingapp.entity.Picture;
 import lk.leon.app.bookingapp.repository.PropertyRepository;
 import lk.leon.app.bookingapp.repository.PictureRepository;
+import lk.leon.app.bookingapp.repository.UserRepository;
 import lk.leon.app.bookingapp.service.custom.PropertyService;
 import lk.leon.app.bookingapp.service.util.Transformer;
 import lk.leon.app.bookingapp.to.PropertyTo;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 public class PropertyServiceImpl implements PropertyService {
 
     private final PropertyRepository propertyRepository;
+    private final UserRepository userRepository;
     private final PictureRepository pictureRepository;
     private final Transformer transformer;
     private final Bucket bucket;
@@ -122,14 +124,29 @@ public class PropertyServiceImpl implements PropertyService {
     public List<PropertyTo> getProperties(PropertyType type) {
         List<Property> propertyList = (type==null) ? propertyRepository.findAll() : propertyRepository.findPropertyByType(type);
 
-        List<PropertyTo> propertyTos = propertyList.stream().map(hotel -> {
-            PropertyTo propertyTo = transformer.toPropertyTo(hotel);
-            if(hotel.getPictureList() != null && hotel.getPictureList().size()> 0){
-                return hotelWithImage(hotel, propertyTo);
+        List<PropertyTo> propertyTos = propertyList.stream().map(property -> {
+            PropertyTo propertyTo = transformer.toPropertyTo(property);
+            if(property.getPictureList() != null && property.getPictureList().size()> 0){
+                return hotelWithImage(property, propertyTo);
             }
             return propertyTo;
         }).collect(Collectors.toList());
         return propertyTos;
+    }
+
+    @Override
+    public List<PropertyTo> getProperties(Integer id) {
+        if(propertyRepository.findPropertyByUserId(id)==null) return null;
+        List<Property> propertyList = propertyRepository.findPropertyByUserId(id);
+        List<PropertyTo> propertyTos = propertyList.stream().map(property -> {
+            PropertyTo propertyTo = transformer.toPropertyTo(property);
+            if (property.getPictureList() != null && property.getPictureList().size() > 0) {
+                return hotelWithImage(property, propertyTo);
+            }
+            return propertyTo;
+        }).collect(Collectors.toList());
+        return propertyTos;
+
     }
 
     public PropertyTo hotelWithImage(Property property, PropertyTo propertyTo){

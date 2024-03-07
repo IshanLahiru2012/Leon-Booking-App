@@ -7,4 +7,5 @@ export abstract class PropertyService {
 
   abstract getAllProperty(): Observable<PropertyDto[]>;
   abstract getPropertyByType(type:string):Observable<PropertyDto[]>;
+  abstract getPropertyByUserId(id:number):Observable<PropertyDto[]>;
 }

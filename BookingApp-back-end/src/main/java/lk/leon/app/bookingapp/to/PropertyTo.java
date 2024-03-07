@@ -4,6 +4,7 @@ import lk.leon.app.bookingapp.util.PropertyType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -15,18 +16,22 @@ import java.util.List;
 public class PropertyTo {
     @Null(message = "Id should be empty")
     private int id;
-    @Column(length = 100, nullable = false)
+    @NotBlank(message = "Name cannot be empty")
+    @Pattern(regexp = "^[A-Za-z ]{2,}$", message = "Invalid name")
     private String name;
-    @Column(length = 100, nullable = false)
+    @NotBlank(message = "City cannot be empty")
+    @Length(min = 3, message = "Invalid city")
     private String city;
+    @NotNull(message = "Type should be either 'resort', 'apartment', 'villa'  ")
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "ENUM('APARTMENT','RESORT','VILLA')")
     private PropertyType type;
-    @Column(name = "charge_per_night", nullable = false)
     @Positive(message = "charges cannot be negative")
     private int chargePerNight;
+    @Positive(message = "charges cannot be negative")
+    private Integer userId;
     @Null(message = "Picture should be empty")
     private List<String> pictureList;
+
 
 
 }
