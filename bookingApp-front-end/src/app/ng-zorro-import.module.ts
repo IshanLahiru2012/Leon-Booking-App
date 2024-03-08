@@ -5,6 +5,7 @@ import {NzFormControlComponent, NzFormDirective, NzFormItemComponent} from "ng-z
 import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
+import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
 
 
 
@@ -20,7 +21,9 @@ import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
     NzColDirective,
     NzRowDirective,
     NzFormDirective,
-    NzInputDirective
+    NzInputDirective,
+    NzOptionComponent,
+    NzSelectComponent,
   ],
   exports:[
     NzSpinComponent,
@@ -31,7 +34,9 @@ import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
     NzColDirective,
     NzRowDirective,
     NzFormDirective,
-    NzInputDirective
-  ]
+    NzInputDirective,
+    NzOptionComponent,
+    NzSelectComponent
+    ]
 })
 export class NgZorroImportModule { }

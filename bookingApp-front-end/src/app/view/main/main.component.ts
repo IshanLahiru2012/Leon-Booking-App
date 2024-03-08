@@ -19,7 +19,7 @@ import {StorageService} from "../../service/storage.service";
           </ng-container >
           <ng-container *ngIf="storageService.isAdminLoggedIn()">
             <div class="flex gap-3">
-              <button class="text-white hover:bg-sky-600 rounded px-2 py-1">List Your Property</button>
+              <button class="text-white hover:bg-sky-600 rounded px-2 py-1" (click)="saveProperty()">List Your Property</button>
               <button class="text-white hover:bg-sky-600 rounded px-2 py-1" (click)="listedProperty()">Your Properties</button>
               <button class="border-2 px-1 bg-gradient-to-l from-emerald-500 to-cyan-400 text-gray-600 border-sky-700 rounded-xl hover:border-cyan-500 active:border-white"
                        (click)="logout()" routerLinkActive="active">Logout</button>
@@ -39,7 +39,8 @@ import {StorageService} from "../../service/storage.service";
   styleUrl: './main.component.scss'
 })
 export class MainComponent {
-  protected storageService = StorageService
+
+  storageService = StorageService;
   constructor(private router: Router) {
 
   }
@@ -48,10 +49,14 @@ export class MainComponent {
   }
 
   logout(){
-    this.storageService.logout();
+    StorageService.logout();
     this.router.navigateByUrl("/body")
   }
   listedProperty() {
     this.router.navigateByUrl("/listed-property")
+  }
+
+  saveProperty() {
+    this.router.navigateByUrl("/save-property")
   }
 }

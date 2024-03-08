@@ -20,13 +20,12 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ListedPropertyComponent implements OnInit{
   protected propertyList$!: Observable<PropertyDto[]>;
-  private storageService = StorageService;
 
   constructor(private propertyService: PropertyService , private route:ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.propertyList$ = this.propertyService.getPropertyByUserId(this.storageService.getUserId());
+    this.propertyList$ = this.propertyService.getPropertyByUserId(StorageService.getUserId());
     console.log(this.propertyList$)
   }
 }

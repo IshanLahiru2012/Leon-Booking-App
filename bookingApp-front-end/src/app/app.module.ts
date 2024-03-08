@@ -16,9 +16,15 @@ import { LoginComponent } from './view/login/login.component';
 import {RoutingModule} from "./routing.module";
 import { SignupComponent } from './view/signup/signup.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {NgZorroImportModule} from "./ng-zorro-import.module";
-import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
 import { ListedPropertyComponent } from './view/listed-property/listed-property.component';
+import { SavePropertyComponent } from './view/save-property/save-property.component';
+import {NgZorroImportModule} from "./ng-zorro-import.module";
+import {MatFormField} from "@angular/material/form-field";
+import {MatInput, MatInputModule} from "@angular/material/input";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
+import {MatOption, MatSelect} from "@angular/material/select";
+
 
 
 
@@ -35,7 +41,8 @@ import { ListedPropertyComponent } from './view/listed-property/listed-property.
     ImageListComponent,
     LoginComponent,
     SignupComponent,
-    ListedPropertyComponent
+    ListedPropertyComponent,
+    SavePropertyComponent
 
   ],
   imports: [
@@ -46,12 +53,21 @@ import { ListedPropertyComponent } from './view/listed-property/listed-property.
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgZorroImportModule,
-    NzOptionComponent,
-    NzSelectComponent
+    MatFormField,
+    MatInputModule,
+    MatInput,
+    MatCardContent,
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatSelect,
+    MatOption,
+
   ],
 
   providers: [
-    {provide: PropertyService, useClass:PropertyServiceImpl}
+    {provide: PropertyService, useClass:PropertyServiceImpl},
+    provideAnimationsAsync()
 
   ],
   bootstrap: [AppComponent]

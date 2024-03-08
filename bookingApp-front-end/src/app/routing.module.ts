@@ -7,6 +7,7 @@ import {PropertyListComponent} from "./view/property-list/property-list.componen
 import {SignupComponent} from "./view/signup/signup.component";
 import {MainComponent} from "./view/main/main.component";
 import {ListedPropertyComponent} from "./view/listed-property/listed-property.component";
+import {SavePropertyComponent} from "./view/save-property/save-property.component";
 
 const APP_ROUTES: Routes=[
   {
@@ -15,11 +16,15 @@ const APP_ROUTES: Routes=[
   },
   {
     path: 'app',
-    component: MainComponent,
+    component: BodyComponent,
   },
   {
     path:'listed-property',
     component:ListedPropertyComponent
+  },
+  {
+    path:'save-property',
+    component:SavePropertyComponent
   },
   {
     path: 'body',
