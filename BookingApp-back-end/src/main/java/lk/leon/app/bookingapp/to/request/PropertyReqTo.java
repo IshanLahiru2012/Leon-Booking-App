@@ -31,4 +31,6 @@ public class PropertyReqTo implements Serializable {
     private int chargePerNight;
     @PropertyImage()
     private List<MultipartFile> pictureList;
+    @NotNull(message = "userId cannot be empty")
+    private Integer userId;
 }

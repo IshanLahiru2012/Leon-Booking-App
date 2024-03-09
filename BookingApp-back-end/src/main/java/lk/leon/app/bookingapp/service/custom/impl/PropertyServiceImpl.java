@@ -5,6 +5,7 @@ import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.Storage;
 import lk.leon.app.bookingapp.entity.Property;
 import lk.leon.app.bookingapp.entity.Picture;
+import lk.leon.app.bookingapp.entity.User;
 import lk.leon.app.bookingapp.repository.PropertyRepository;
 import lk.leon.app.bookingapp.repository.PictureRepository;
 import lk.leon.app.bookingapp.repository.UserRepository;
@@ -21,6 +22,7 @@ import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -38,6 +40,8 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public PropertyTo saveProperty(PropertyReqTo propertyReqTo){
         Property property = transformer.fromPropertyReqTo(propertyReqTo);
+        Optional<User> user = userRepository.findById(propertyReqTo.getUserId());
+        property.setUser(user.orElseThrow());
         propertyRepository.save(property);
 
         List<String> urlList = new ArrayList<>();

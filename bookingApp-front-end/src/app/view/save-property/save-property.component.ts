@@ -47,6 +47,20 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
               Property Type is <strong>required</strong>
             </mat-error>
           </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Price/day</mat-label>
+            <input matInput type="number" formControlName="price" placeholder="0">
+            <mat-error *ngIf="saveForm.get('type')?.hasError('required')">
+              Property Price is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+<!--          <mat-form-field class="full-width">-->
+<!--            <mat-label>Property Photos</mat-label>-->
+<!--            <input matInput type="file" (change)="onFileSelected($event)" formControlName="price" placeholder="0">-->
+<!--            <mat-error *ngIf="saveForm.get('type')?.hasError('required')">-->
+<!--              Property Price is <strong>required</strong>-->
+<!--            </mat-error>-->
+<!--          </mat-form-field>-->
         </form>
       </mat-card-content>
     </mat-card>
@@ -62,9 +76,10 @@ export class SavePropertyComponent implements OnInit{
   matcher = new MyErrorStateMatcher();
   saveForm! : FormGroup;
   foods = [
-    {value: 'Steak'},
-    {value: 'Pizza'},
-    {value:  'Tacos'},
+    {value: 'Hotel'},
+    {value: 'Apartment'},
+    {value:  'Resort'},
+    {value:  'Villa'},
   ];
 
   constructor(private formBuilder:FormBuilder) {
@@ -79,5 +94,7 @@ export class SavePropertyComponent implements OnInit{
     })
   }
 
+  onFileSelected(event:any) {
 
+  }
 }
