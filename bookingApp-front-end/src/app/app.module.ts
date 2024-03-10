@@ -22,8 +22,11 @@ import {NgZorroImportModule} from "./ng-zorro-import.module";
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput, MatInputModule} from "@angular/material/input";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
+import {MatCard, MatCardContent, MatCardHeader, MatCardMdImage, MatCardTitle} from "@angular/material/card";
 import {MatOption, MatSelect} from "@angular/material/select";
+import {MatIcon} from "@angular/material/icon";
+import {MatButton, MatMiniFabButton} from "@angular/material/button";
+import {MatProgressBar} from "@angular/material/progress-bar";
 
 
 
@@ -62,6 +65,11 @@ import {MatOption, MatSelect} from "@angular/material/select";
     MatCardTitle,
     MatSelect,
     MatOption,
+    MatIcon,
+    MatButton,
+    MatCardMdImage,
+    MatMiniFabButton,
+    MatProgressBar,
 
   ],
 
