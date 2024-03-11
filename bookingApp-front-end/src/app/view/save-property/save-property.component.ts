@@ -15,96 +15,93 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-save-property',
   template: `
 
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title >List A Property</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <form class="form" [formGroup]="saveForm">
-          <mat-form-field class="full-width">
-            <mat-label>Property Name</mat-label>
-            <input type="text" matInput formControlName="name" [errorStateMatcher]="matcher"
-                   placeholder="Ex. Property Name">
-            <mat-error *ngIf="saveForm.get('name')?.hasError('required')">
-              Property Name is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <mat-label>City</mat-label>
-            <input type="text" matInput formControlName="city" [errorStateMatcher]="matcher"
-                   placeholder="Ex. City">
-            <!--            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">-->
-            <!--              Please enter a valid email address-->
-            <!--            </mat-error>-->
-            <mat-error *ngIf="saveForm.get('city')?.hasError('required')">
-              City Name is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <mat-label>Property Type</mat-label>
-            <mat-select formControlName="type" [errorStateMatcher]="matcher">
-              <mat-option *ngFor="let food of foods" [value]="food.value" >{{ food.value }}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="saveForm.get('type')?.hasError('required')">
-              Property Type is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <mat-label>Price/day</mat-label>
-            <input matInput type="number" formControlName="price" placeholder="0">
-            <mat-error *ngIf="saveForm.get('price')?.hasError('required')">
-              Property Price is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-              <input type="file" class="file-input"
-                     [accept]="requiredFileType"
-                     (change)="onFileSelected($event)" #fileUpload multiple formControlName="photo">
+    <div class="container">
+      <mat-card>
 
-              <div class="file-upload">
+        <mat-card-header>
+          <mat-card-title>List A Property</mat-card-title>
+        </mat-card-header>
 
-                {{fileName || "No file uploaded yet."}}
+        <mat-card-content>
 
-                <button mat-mini-fab color="primary" class="upload-btn"
-                        (click)="fileUpload.click()">
-                  <mat-icon>attach_file</mat-icon>
+          <form class="form" [formGroup]="saveForm">
 
-                </button>
+            <mat-form-field class="full-width">
+              <mat-label>Property Name</mat-label>
+              <input type="text" matInput formControlName="name" [errorStateMatcher]="matcher"
+                     placeholder="Ex. Property Name">
+              <mat-error *ngIf="saveForm.get('name')?.hasError('required')">
+                Property Name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
 
+            <mat-form-field class="full-width">
+              <mat-label>City</mat-label>
+              <input type="text" matInput formControlName="city" [errorStateMatcher]="matcher"
+                     placeholder="Ex. City">
+              <!--            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">-->
+              <!--              Please enter a valid email address-->
+              <!--            </mat-error>-->
+              <mat-error *ngIf="saveForm.get('city')?.hasError('required')">
+                City Name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <mat-label aria-labelledby="ab">Property Type</mat-label>
+              <mat-select id="ab" formControlName="type" [errorStateMatcher]="matcher">
+                <mat-option *ngFor="let property of properties"
+                            [value]="property.value">{{ property.value }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="saveForm.get('type')?.hasError('required')">
+                Property Type is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <mat-label>Price/day</mat-label>
+              <input matInput type="number" formControlName="price" placeholder="0">
+              <mat-error *ngIf="saveForm.get('price')?.hasError('required')">
+                Property Price is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <div>
+              <div class="image-upload ">
+                <mat-label class="pl-3">Photo/s :</mat-label>
+                <div class="flex justify-self-center gap-2">
+                  <input type="file" class="file-input" [accept]="fileType" (change)="onFileSelected($event)"
+                         #fileUpload multiple formControlName="photo">
+                  {{upFiles.length || "No file uploaded yet. "}}
+                  <button mat-mini-fab type="button" color="primary" class="upload-btn" (click)="fileUpload.click()">
+                    <mat-icon>upload</mat-icon>
+                  </button>
+                </div>
               </div>
-
-              <div >
-
-                <mat-icon class="cancel-upload" (click)="cancelUpload()"
-                          *ngIf="uploadProgress">delete_forever</mat-icon>
-
+            </div>
+          </form>
+          <div class="p-2" *ngIf="onFileSelected">
+            <div class="grid grid-cols-4">
+              <div *ngFor="let upFile of upFiles" class="w-20">
+                <img src="{{upFile}}" alt="">
               </div>
-<!--          <mat-form-field class="full-width">-->
-<!--            <mat-label>Property Photos</mat-label>-->
-<!--            <input type="file" (change)="onFileSelected($event)" accept=".jpeg,.gif" formControlName="photo" multiple>-->
-<!--            <mat-error *ngIf="saveForm.get('type')?.hasError('required')">-->
-<!--              Property Price is <strong>required</strong>-->
-<!--            </mat-error>-->
-<!--          </mat-form-field>-->
-        </form>
-
-      </mat-card-content>
-    </mat-card>
-
-    <div *ngIf="onFileSelected">
-      <img src="{{upFile}}">
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button type="submit" color="primary" class="ml-2">Submit</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
-
-
-
-
 
   `,
   styleUrl: './save-property.component.scss'
 })
 export class SavePropertyComponent implements OnInit{
   matcher = new MyErrorStateMatcher();
+  fileType = "image/gif,image/jpeg";
   saveForm! : FormGroup;
-  foods = [
+  properties = [
     {value: 'Hotel'},
     {value: 'Apartment'},
     {value:  'Resort'},
@@ -112,8 +109,7 @@ export class SavePropertyComponent implements OnInit{
   ];
 
   constructor(private formBuilder:FormBuilder,
-              private http:HttpClient,
-              ) {
+              private http:HttpClient) {
   }
 
 
@@ -125,61 +121,37 @@ export class SavePropertyComponent implements OnInit{
       price:[null,[Validators.required]],
       photo:[null,[Validators.required]]
     })
+
   }
 
-  // onFileSelected(event: any) {
-  //   const files: FileList = event.target.files;
-  //   // You can now handle the selected files
-  //   console.log(files);
-  // }
-  fileName = '';
-  @Input()
-  requiredFileType! :string;
-  uploadProgress! :number;
-  upFile! : File;
-  // uploadSub :Subscription
-
+  upFiles :  (FileList & Iterable<File>)[] =[];
+  private formData = new FormData();
 
 
   onFileSelected(event:any) {
-    const file:File = event.target.files[0];
-    this.upFile =file;
 
 
-    if (file) {
-      this.fileName = file.name;
-      const formData = new FormData();
-      formData.append("thumbnail", file);
+    const files:FileList = event.target.files;
 
-      const reader = new FileReader();
-      reader.onload = (e:any)=>{
-        this.upFile = e.target.result;
+    const listSize:number = event.target.files.length;
+
+    if (listSize>0) {
+    
+      for(let i=0; i<listSize; i++){
+        const reader = new FileReader();
+        const file:File = event.target.files[i];
+        this.formData.append("photo",file,file.name);
+
+
+        reader.onload = (e:any)=>{
+          this.upFiles![i] = e.target.result;
+        }
+        reader.readAsDataURL(file);
       }
-      reader.readAsDataURL(file);
 
-      const upload$ = this.http.post("/api/thumbnail-upload", formData, {
-        reportProgress: true,
-        observe: 'events'
-      })
-        .pipe(
-          finalize(() => this.reset())
-        );
-
-      // this.uploadSub = upload$.subscribe(event => {
-      //   if (event.type == HttpEventType.UploadProgress) {
-      //     this.uploadProgress = Math.round(100 * (event.loaded / event.total!));
-      //   }
-      // })
     }
+    console.log(listSize)
     console.log(this.saveForm.value)
   }
 
-  cancelUpload() {
-    // this.uploadSub.unsubscribe();
-    this.reset();
-  }
-
-  reset() {
-    this.uploadProgress = 0;
-  }
-}
+ }
