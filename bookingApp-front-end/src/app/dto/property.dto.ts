@@ -6,4 +6,5 @@ export class PropertyDto{
               public chargePerNight: number,
               public pictureList: Array<string>) {
   }
+
 }

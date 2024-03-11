@@ -3,6 +3,10 @@ import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validat
 import {ErrorStateMatcher} from "@angular/material/core";
 import {finalize, Subscription} from "rxjs";
 import {HttpClient, HttpEventType} from "@angular/common/http";
+import {PropertyDto} from "../../dto/property.dto";
+import {PropertyReqDto} from "../../dto/propertyReq.dto";
+import {StorageService} from "../../service/storage.service";
+import {PropertyService} from "../../service/property.service";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -39,9 +43,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
               <mat-label>City</mat-label>
               <input type="text" matInput formControlName="city" [errorStateMatcher]="matcher"
                      placeholder="Ex. City">
-              <!--            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">-->
-              <!--              Please enter a valid email address-->
-              <!--            </mat-error>-->
               <mat-error *ngIf="saveForm.get('city')?.hasError('required')">
                 City Name is <strong>required</strong>
               </mat-error>
@@ -72,7 +73,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
                 <div class="flex justify-self-center gap-2">
                   <input type="file" class="file-input" [accept]="fileType" (change)="onFileSelected($event)"
                          #fileUpload multiple formControlName="photo">
-                  {{upFiles.length || "No file uploaded yet. "}}
+                  {{previewFile.length ? (previewFile.length + " Files"): "No file uploaded yet. "}}
                   <button mat-mini-fab type="button" color="primary" class="upload-btn" (click)="fileUpload.click()">
                     <mat-icon>upload</mat-icon>
                   </button>
@@ -80,16 +81,16 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
               </div>
             </div>
           </form>
-          <div class="p-2" *ngIf="onFileSelected">
-            <div class="grid grid-cols-4">
-              <div *ngFor="let upFile of upFiles" class="w-20">
-                <img src="{{upFile}}" alt="">
+          <ng-container *ngIf="isFileSelected">
+            <div class="grid grid-cols-4 p-2 gap-1 border border-cyan-300">
+              <div *ngFor="let file of previewFile" class="bg-emerald-400 overflow-y-hidden image-container">
+                <img src="{{file}}" alt=""  class="image">
               </div>
             </div>
-          </div>
+          </ng-container>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button type="submit" color="primary" class="ml-2">Submit</button>
+          <button mat-raised-button type="submit" color="primary" class="ml-2" (click)="onSave()">Submit</button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -101,6 +102,9 @@ export class SavePropertyComponent implements OnInit{
   matcher = new MyErrorStateMatcher();
   fileType = "image/gif,image/jpeg";
   saveForm! : FormGroup;
+  previewFile :  (FileList & Iterable<File>)[] =[];
+  files!:FileList;
+  isFileSelected: boolean=false;
   properties = [
     {value: 'Hotel'},
     {value: 'Apartment'},
@@ -109,7 +113,8 @@ export class SavePropertyComponent implements OnInit{
   ];
 
   constructor(private formBuilder:FormBuilder,
-              private http:HttpClient) {
+              private http:HttpClient,
+              private propertyService: PropertyService) {
   }
 
 
@@ -124,34 +129,49 @@ export class SavePropertyComponent implements OnInit{
 
   }
 
-  upFiles :  (FileList & Iterable<File>)[] =[];
-  private formData = new FormData();
-
-
   onFileSelected(event:any) {
 
-
-    const files:FileList = event.target.files;
-
+    this.isFileSelected =true;
+    this.files = event.target.files;
     const listSize:number = event.target.files.length;
 
     if (listSize>0) {
-    
       for(let i=0; i<listSize; i++){
         const reader = new FileReader();
         const file:File = event.target.files[i];
-        this.formData.append("photo",file,file.name);
-
-
         reader.onload = (e:any)=>{
-          this.upFiles![i] = e.target.result;
+          this.previewFile![i] = e.target.result;
         }
         reader.readAsDataURL(file);
       }
 
     }
-    console.log(listSize)
-    console.log(this.saveForm.value)
   }
 
- }
+  onSave() {
+    if(this.saveForm.invalid){
+      console.error('One or more form controls are null.');
+      return;
+    }
+    const pictureList = this.files;
+
+    const formData = new FormData;
+    formData.append('name',this.saveForm.get('name')?.value);
+    formData.append('city',this.saveForm.get('city')?.value);
+    formData.append('type',this.saveForm.get('type')?.value);
+    formData.append('chargePerNight',this.saveForm.get('price')?.value);
+    formData.append('userId',StorageService.getUserId());
+    for(let i=0; i<pictureList.length; i++){
+      formData.append('pictureList',pictureList[i]);
+    }
+    this.propertyService.saveProperty(formData).subscribe(
+      resp=>{
+        console.log(resp);
+        this.saveForm.reset();
+        this.isFileSelected =false;
+        // this.previewFile=[];
+
+      });
+
+  }
+}
