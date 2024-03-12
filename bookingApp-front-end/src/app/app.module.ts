@@ -35,6 +35,7 @@ import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {NzImageGroupComponent} from "ng-zorro-antd/image";
+import { UpdatePropertyComponent } from './view/update-property/update-property.component';
 
 
 
@@ -53,7 +54,8 @@ import {NzImageGroupComponent} from "ng-zorro-antd/image";
     LoginComponent,
     SignupComponent,
     ListedPropertyComponent,
-    SavePropertyComponent
+    SavePropertyComponent,
+    UpdatePropertyComponent
 
   ],
   imports: [

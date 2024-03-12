@@ -1,8 +1,9 @@
-import {Component, Inject, Input} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {PropertyDto} from "../../dto/property.dto";
 import {Router} from "@angular/router";
-import {ImageListService} from "../../service/image.list.service";
+import {InfoService} from "../../service/info.service";
 import {StorageService} from "../../service/storage.service";
+import {PropertyService} from "../../service/property.service";
 
 @Component({
   selector: 'app-property',
@@ -29,8 +30,13 @@ import {StorageService} from "../../service/storage.service";
           <ng-container *ngIf="!storageService.isAdminLoggedIn()">
             <button class="bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-400 text-white border font-bold py-2 px-4 rounded" id="bookBtn">Book</button>
           </ng-container>
-          <ng-container *ngIf="storageService.isAdminLoggedIn()">
-            <button class="bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-400 text-white border font-bold py-2 px-4 rounded" id="editBtn">Edit</button>
+          <ng-container *ngIf="storageService.isAdminLoggedIn() && !infoService.getIsEditing()">
+            <button class="bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-400 text-white border
+            font-bold py-2 px-4 rounded" id="editBtn" (click)="onUpdate(property)">Edit</button>
+          </ng-container>
+          <ng-container *ngIf="storageService.isAdminLoggedIn() && infoService.getIsEditing()">
+            <button class="bg-red-500 hover:bg-red-700 active:bg-red-400 text-white border
+            font-bold py-2 px-4 rounded" id="editBtn" (click)="onDelete(property)">Delete</button>
           </ng-container>
         </div>
 
@@ -40,19 +46,32 @@ import {StorageService} from "../../service/storage.service";
   `,
   styleUrl: './property.component.scss'
 })
-export class PropertyComponent {
+export class PropertyComponent{
 
   @Input()
   property !: PropertyDto;
   storageService= StorageService;
 
-  constructor(private router: Router, private imageListService:ImageListService) {
+  constructor(private router: Router,
+              protected infoService:InfoService,
+              private propertyService:PropertyService) {
   }
   setProperty(property:PropertyDto){
-    this.imageListService.setProperty(property);
+    this.infoService.setProperty(property);
   }
 
-  imageHandler() {
-    this.router.navigateByUrl('/image')
+  onUpdate(property:PropertyDto) {
+    this.infoService.setIsEditing(true)
+    this.router.navigate(['/update-property',{property:JSON.stringify(property)}]);
+  }
+  onDelete(property: PropertyDto) {
+    console.log(property.id.valueOf())
+    this.propertyService.deleteProperty(property.id.valueOf()).subscribe(resp=>{
+      console.log("Succesfully deleted");
+      this.router.navigateByUrl("/listed-property")
+    },
+      error => {
+      console.log("Something went wrong"+error);
+      })
   }
 }

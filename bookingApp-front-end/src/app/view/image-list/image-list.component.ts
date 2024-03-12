@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import {ImageListService} from "../../service/image.list.service";
+import {InfoService} from "../../service/info.service";
 import {PropertyDto} from "../../dto/property.dto";
 
 @Component({
@@ -19,7 +19,7 @@ import {PropertyDto} from "../../dto/property.dto";
 export class ImageListComponent implements OnInit{
 
   property!: PropertyDto;
-  constructor(private imageListService: ImageListService) {
+  constructor(private imageListService: InfoService) {
 
   }
   ngOnInit(): void{

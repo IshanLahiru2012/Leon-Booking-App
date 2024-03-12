@@ -1,0 +1,49 @@
+.form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+.file-input {
+  display: none;
+}
+.container{
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+.image-upload{
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  background-color: #f5f4f4;
+  border-bottom-width: 1px ;
+  border-bottom-color: black;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.image-upload:hover{
+  background-color: #e5e5e5;
+}
+.image-upload:active{
+  border-bottom-width: 2px ;
+  border-bottom-color: #03038c;
+}
+.img-preview{
+  display: grid;
+}
+.image-container{
+  width: 100px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.image{
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+

@@ -26,6 +26,5 @@ export class ListedPropertyComponent implements OnInit{
 
   ngOnInit() {
     this.propertyList$ = this.propertyService.getPropertyByUserId(StorageService.getUserId());
-    console.log(this.propertyList$)
   }
 }

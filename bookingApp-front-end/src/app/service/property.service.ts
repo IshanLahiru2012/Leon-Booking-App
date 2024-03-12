@@ -10,4 +10,6 @@ export abstract class PropertyService {
   abstract saveProperty(propReqDto:FormData):Observable<PropertyDto>;
   abstract getPropertyByType(type:string):Observable<PropertyDto[]>;
   abstract getPropertyByUserId(id:number):Observable<PropertyDto[]>;
+  abstract deleteProperty(id:number):Observable<any>;
+  abstract updateProperty(id:number,formData:FormData):Observable<PropertyDto>;
 }

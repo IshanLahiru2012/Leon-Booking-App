@@ -46,7 +46,15 @@ export class PropertyServiceImpl implements PropertyService{
       .pipe(finalize(()=> this.initialized =true));
   }
 
+  deleteProperty(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.API_BASE_URL}/${id}`)
+      .pipe(finalize(()=>this.initialized=true));
+  }
 
+  updateProperty(id:number,formData: FormData): Observable<PropertyDto> {
+    return this.http.patch<PropertyDto>(`${this.API_BASE_URL}/${id}`,formData)
+      .pipe(finalize(()=>this.initialized=true));
+  }
 
 
 }
