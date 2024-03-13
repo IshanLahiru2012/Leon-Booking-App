@@ -29,6 +29,8 @@ public class PropertyReqTo implements Serializable {
     private PropertyType type;
     @Positive(message = "charges cannot be negative")
     private int chargePerNight;
+    @Positive(message = "rooms should be positive")
+    private int rooms;
     @PropertyImage()
     private List<MultipartFile> pictureList;
     @NotNull(message = "userId cannot be empty")

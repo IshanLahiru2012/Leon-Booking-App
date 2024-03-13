@@ -23,12 +23,14 @@ import {PropertyService} from "../../service/property.service";
           <a class="pl-4 font-bold hover:underline hover:cursor-pointer" [routerLink]="['/image']" (click)="setProperty(property)"> {{property.name}}</a>
           <p class="text-gray-400 text-sm pl-5">{{property.city}}</p>
           <p class="text-gray-400 text-sm pl-5">{{property.type}}</p>
+          <p class="text-gray-400 text-sm pl-5">Rooms: {{property.rooms}}</p>
           <p class="text-right font-bold pr-2">LKR. {{property.chargePerNight}}</p>
           <p class="text-right text-xs pr-2">For tonight</p>
         </div>
         <div class="text-right m-1">
-          <ng-container *ngIf="!storageService.isAdminLoggedIn()">
-            <button class="bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-400 text-white border font-bold py-2 px-4 rounded" id="bookBtn">Book</button>
+          <ng-container *ngIf="!storageService.isAdminLoggedIn() && !infoService.getIsBooking()">
+            <button class="bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-400 text-white border
+                    font-bold py-2 px-4 rounded" id="bookBtn" (click)="onBook(property)">Book</button>
           </ng-container>
           <ng-container *ngIf="storageService.isAdminLoggedIn() && !infoService.getIsEditing()">
             <button class="bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-400 text-white border
@@ -73,5 +75,10 @@ export class PropertyComponent{
       error => {
       console.log("Something went wrong"+error);
       })
+  }
+
+  onBook(property:PropertyDto) {
+    console.log(property)
+    this.router.navigate(["/booking",{property:JSON.stringify(property)}])
   }
 }

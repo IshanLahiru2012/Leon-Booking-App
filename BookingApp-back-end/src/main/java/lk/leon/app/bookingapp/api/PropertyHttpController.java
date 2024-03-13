@@ -23,7 +23,6 @@ public class PropertyHttpController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = "multipart/form-data", produces = "application/json")
     public PropertyTo createNewProperty(@ModelAttribute @Validated PropertyReqTo propertyReqTo){
-        System.out.println("awa");
         return propertyService.saveProperty(propertyReqTo);
     }
 

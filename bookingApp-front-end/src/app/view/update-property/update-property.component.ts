@@ -67,6 +67,17 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
               </mat-error>
             </mat-form-field>
 
+            <mat-form-field class="full-width">
+              <mat-label>Rooms</mat-label>
+              <input matInput min="1" type="number" formControlName="rooms">
+              <mat-error *ngIf="saveForm.get('rooms')?.hasError('required')">
+                Room amount is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="!saveForm.get('rooms')?.hasError('required') && saveForm.get('rooms')?.hasError('min')">
+                Room amount should be <strong>Positive</strong>
+              </mat-error>
+            </mat-form-field>
+
             <div>
               <div class="image-upload ">
                 <mat-label class="pl-3">Photo/s :</mat-label>
@@ -138,6 +149,7 @@ export class UpdatePropertyComponent implements OnInit,OnDestroy{
       city:[null,[Validators.required]],
       type:[null,[Validators.required]],
       price:[null,[Validators.required]],
+      rooms:[null,[Validators.required, Validators.min(1)]],
       photo:[null]
     })
 
@@ -178,6 +190,7 @@ export class UpdatePropertyComponent implements OnInit,OnDestroy{
     formData.append('type',this.saveForm.get('type')?.value);
     formData.append('chargePerNight',this.saveForm.get('price')?.value);
     formData.append('userId',StorageService.getUserId());
+    formData.append('rooms',this.saveForm.get('rooms')?.value);
     if(pictureList){
       for(let i=0; i<pictureList.length; i++){
         formData.append('pictureList',pictureList[i]);

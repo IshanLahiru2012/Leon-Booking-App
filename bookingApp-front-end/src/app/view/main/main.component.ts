@@ -27,7 +27,7 @@ import {StorageService} from "../../service/storage.service";
           </ng-container>
           <ng-container *ngIf="storageService.isClientLoggedIn()">
             <div class="flex gap-3">
-              <button class="text-white hover:bg-sky-600 rounded px-2 py-1">Your Bookings</button>
+              <button class="text-white hover:bg-sky-600 rounded px-2 py-1" (click)="onBooking()">Your Bookings</button>
               <button class="border-2 px-1 bg-gradient-to-l from-emerald-500 to-cyan-400 text-gray-600 border-sky-700 rounded-xl hover:border-cyan-500 active:border-white"
                        (click)="logout()" routerLinkActive="active">Logout</button>
             </div>
@@ -58,5 +58,9 @@ export class MainComponent {
 
   saveProperty() {
     this.router.navigateByUrl("/save-property")
+  }
+
+  onBooking() {
+    this.router.navigateByUrl("/booked-list")
   }
 }

@@ -34,6 +34,7 @@ public class WebSecurityConfiguration {
                 req.antMatchers("/api/v1/auths/**").permitAll()
                         .antMatchers("/api/v1/admin/**").hasAnyAuthority(UserRole.ADMIN.name())
                         .antMatchers("/api/v1/properties/**").permitAll()
+                        .antMatchers("/api/v1/bookings/**").permitAll()
                         .antMatchers("/api/v1/customers/**").hasAnyAuthority(UserRole.CLIENT.name())
                         .anyRequest().authenticated()).sessionManagement(manager ->
                 manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

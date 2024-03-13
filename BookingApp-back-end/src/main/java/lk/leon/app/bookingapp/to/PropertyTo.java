@@ -27,6 +27,8 @@ public class PropertyTo {
     private PropertyType type;
     @Positive(message = "charges cannot be negative")
     private int chargePerNight;
+    @Positive(message = "rooms should be positive")
+    private int rooms;
     @Positive(message = "charges cannot be negative")
     private Integer userId;
     @Null(message = "Picture should be empty")

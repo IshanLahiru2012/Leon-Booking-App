@@ -29,6 +29,9 @@ public class Property implements SuperEntity{
     @Column(name = "charge_per_night", nullable = false)
     @Positive
     private int chargePerNight;
+    @Column(nullable = false)
+    @Positive
+    private int rooms;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE)
@@ -36,6 +39,10 @@ public class Property implements SuperEntity{
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id" , nullable = false)
     private User user;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE)
+    private List<Book> bookingList;
 
     public Property(String name, String city, PropertyType type, int chargePerNight) {
         this.name = name;

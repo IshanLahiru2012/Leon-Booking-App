@@ -35,6 +35,10 @@ public class User implements SuperEntity, UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Property> propertyList;
 
+    @ToString.Exclude
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Book> bookingList;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

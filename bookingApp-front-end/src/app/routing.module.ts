@@ -9,6 +9,8 @@ import {MainComponent} from "./view/main/main.component";
 import {ListedPropertyComponent} from "./view/listed-property/listed-property.component";
 import {SavePropertyComponent} from "./view/save-property/save-property.component";
 import {UpdatePropertyComponent} from "./view/update-property/update-property.component";
+import {BookingComponent} from "./view/booking/booking.component";
+import {BookedListComponent} from "./view/booked-list/booked-list.component";
 
 const APP_ROUTES: Routes=[
   {
@@ -26,6 +28,14 @@ const APP_ROUTES: Routes=[
   {
     path:'update-property',
     component:UpdatePropertyComponent
+  },
+  {
+    path:'booking',
+    component:BookingComponent
+  },
+  {
+    path:'booked-list',
+    component:BookedListComponent
   },
   {
     path:'save-property',

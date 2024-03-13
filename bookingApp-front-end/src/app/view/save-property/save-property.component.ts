@@ -62,9 +62,20 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
             <mat-form-field class="full-width">
               <mat-label>Price/day</mat-label>
-              <input matInput type="number" formControlName="price" placeholder="0">
+              <input matInput min="1" type="number" formControlName="price" placeholder="0">
               <mat-error *ngIf="saveForm.get('price')?.hasError('required')">
                 Property Price is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <mat-label>Rooms</mat-label>
+              <input matInput min="1" type="number" formControlName="rooms">
+              <mat-error *ngIf="saveForm.get('rooms')?.hasError('required')">
+                Room amount is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="!saveForm.get('rooms')?.hasError('required') && saveForm.get('rooms')?.hasError('min')">
+                Room amount should be <strong>Positive</strong>
               </mat-error>
             </mat-form-field>
 
@@ -126,6 +137,7 @@ export class SavePropertyComponent implements OnInit{
       city:[null,[Validators.required]],
       type:[null,[Validators.required]],
       price:[null,[Validators.required]],
+      rooms:[null,[Validators.required, Validators.min(1)]],
       photo:[null]
     })
 
@@ -162,6 +174,7 @@ export class SavePropertyComponent implements OnInit{
     formData.append('city',this.saveForm.get('city')?.value);
     formData.append('type',this.saveForm.get('type')?.value);
     formData.append('chargePerNight',this.saveForm.get('price')?.value);
+    formData.append('rooms',this.saveForm.get('rooms')?.value);
     formData.append('userId',StorageService.getUserId());
     if(pictureList){
       for(let i=0; i<pictureList.length; i++){

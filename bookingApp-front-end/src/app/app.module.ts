@@ -36,6 +36,16 @@ import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {NzImageGroupComponent} from "ng-zorro-antd/image";
 import { UpdatePropertyComponent } from './view/update-property/update-property.component';
+import { BookingComponent } from './view/booking/booking.component';
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerModule,
+  MatDatepickerToggle
+} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatCheckbox} from "@angular/material/checkbox";
+import { BookedListComponent } from './view/booked-list/booked-list.component';
 
 
 
@@ -55,35 +65,43 @@ import { UpdatePropertyComponent } from './view/update-property/update-property.
     SignupComponent,
     ListedPropertyComponent,
     SavePropertyComponent,
-    UpdatePropertyComponent
+    UpdatePropertyComponent,
+    BookingComponent,
+    BookedListComponent
 
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    RoutingModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    NgZorroImportModule,
-    MatFormField,
-    MatInputModule,
-    MatInput,
-    MatCardContent,
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatSelect,
-    MatOption,
-    MatIcon,
-    MatButton,
-    MatCardMdImage,
-    MatMiniFabButton,
-    MatProgressBar,
-    MatCardActions,
-    NzImageGroupComponent,
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        RoutingModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        NgZorroImportModule,
+        MatFormField,
+        MatInputModule,
+        MatInput,
+        MatCardContent,
+        MatCard,
+        MatCardHeader,
+        MatCardTitle,
+        MatSelect,
+        MatOption,
+        MatIcon,
+        MatButton,
+        MatCardMdImage,
+        MatMiniFabButton,
+        MatProgressBar,
+        MatCardActions,
+        NzImageGroupComponent,
+        MatDatepickerInput,
+        MatDatepickerToggle,
+        MatDatepicker,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCheckbox
 
-  ],
+    ],
 
   providers: [
     {provide: PropertyService, useClass:PropertyServiceImpl},
