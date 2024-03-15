@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -36,5 +38,27 @@ public class BookServiceImpl implements BookService {
         BookTo bookTo = transformer.toBookTo(booked);
         System.out.println(bookTo);
         return bookTo;
+    }
+
+    @Override
+    public BookTo getBook(Integer id) {
+        Book book = bookRepository.getById(id);
+        BookTo bookTo = transformer.toBookTo(book);
+        return bookTo;
+    }
+
+    @Override
+    public void deleteBooking(Integer id) {
+        bookRepository.findById(id).orElseThrow(() -> new RuntimeException("No property Associated with the id"));
+        bookRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Property> getBookedPropertiesByUserId(Integer id) {
+        List<Property> bookedPropertyByUserId = bookRepository.getBookedPropertyByUserId(id);
+        System.out.println(bookedPropertyByUserId);
+        System.out.println("awa");
+        return bookedPropertyByUserId;
+
     }
 }

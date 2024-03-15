@@ -11,6 +11,7 @@ import {BookingService} from "../../service/booking.service";
 import {BookDto} from "../../dto/book.dto";
 import {BookReqDto} from "../../dto/book.req.dto";
 import {Subscription} from "rxjs";
+import {StorageService} from "../../service/storage.service";
 
 
 @Component({
@@ -109,21 +110,20 @@ export class BookingComponent implements OnInit,OnDestroy{
               private bookingService:BookingService) {
   }
 
-
-  bookSubscription!: Subscription;
   onBook() {
     if(this.bookingForm.invalid){
       console.log("Input are not given")
       return
     }
+    console.log(this.property.id.valueOf())
     let bookReqDto:BookReqDto = new BookReqDto(
-      this.property.userId.valueOf(),
+      StorageService.getUserId(),
       this.property.id.valueOf(),
       this.bookingForm.get('startDate')?.value,
       this.bookingForm.get('endDate')?.value,
       this.bookingForm.get('rooms')?.value,
     );
-     this.bookSubscription=this.bookingService.saveBookings(bookReqDto).subscribe(resp=>{
+    this.bookingService.saveBookings(bookReqDto).subscribe(resp=>{
        this.router.navigateByUrl('/')
        console.log("successfully booked");
      },
@@ -150,7 +150,6 @@ export class BookingComponent implements OnInit,OnDestroy{
   }
   ngOnDestroy() {
     this.infoService.setIsBooking(false);
-    this.bookSubscription.unsubscribe();
   }
 
 

@@ -37,6 +37,7 @@ export class PropertyServiceImpl implements PropertyService{
   }
 
 
+
   isInitialized(): boolean {
     return false;
   }

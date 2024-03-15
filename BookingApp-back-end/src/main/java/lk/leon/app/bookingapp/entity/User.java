@@ -39,11 +39,15 @@ public class User implements SuperEntity, UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Book> bookingList;
 
-
+    public List<Book> getBookingList() {
+        return bookingList;
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(userRole.name()));
     }
+
+
 
     @Override
     public String getUsername() {

@@ -36,6 +36,7 @@ public class Property implements SuperEntity{
     @ToString.Exclude
     @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE)
     private List<Picture> pictureList;
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id" , nullable = false)
     private User user;

@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {InfoService} from "../../service/info.service";
 import {StorageService} from "../../service/storage.service";
 import {PropertyService} from "../../service/property.service";
+import {BookingService} from "../../service/booking.service";
+import {BookDto} from "../../dto/book.dto";
 
 @Component({
   selector: 'app-property',
@@ -21,14 +23,22 @@ import {PropertyService} from "../../service/property.service";
       <div class="col-span-7 flex flex-col justify-between">
         <div class="flex flex-col">
           <a class="pl-4 font-bold hover:underline hover:cursor-pointer" [routerLink]="['/image']" (click)="setProperty(property)"> {{property.name}}</a>
-          <p class="text-gray-400 text-sm pl-5">{{property.city}}</p>
-          <p class="text-gray-400 text-sm pl-5">{{property.type}}</p>
-          <p class="text-gray-400 text-sm pl-5">Rooms: {{property.rooms}}</p>
-          <p class="text-right font-bold pr-2">LKR. {{property.chargePerNight}}</p>
-          <p class="text-right text-xs pr-2">For tonight</p>
+          <span class="text-gray-400 text-sm pl-5">{{property.city}}</span>
+          <span class="text-gray-400 text-sm pl-5">{{property.type}}</span>
+          <span class="text-gray-400 text-sm pl-5">Rooms: {{property.rooms}}</span>
+          <span class="text-right font-bold pr-2">LKR. {{property.chargePerNight}}</span>
+          <span class="text-right text-xs pr-2">For tonight</span>
+          <ng-container *ngIf="storageService.isClientLoggedIn() && infoService.getIsBookingList()">
+            <span class="text-gray-400 text-sm pl-5">From : {{booking?.startDate}}</span>
+            <span class="text-gray-400 text-sm pl-5">To   : {{booking?.endDate}}</span>
+          </ng-container>
         </div>
         <div class="text-right m-1">
-          <ng-container *ngIf="!storageService.isAdminLoggedIn() && !infoService.getIsBooking()">
+          <ng-container *ngIf="storageService.isClientLoggedIn() && infoService.getIsBookingList()">
+            <button class="bg-amber-500 hover:bg-amber-600 active:bg-amber-400 text-white border
+                    font-bold py-2 px-4 rounded" id="cancelBtn" (click)="onCancel(property)">Cancel</button>
+          </ng-container>
+          <ng-container *ngIf="!storageService.isAdminLoggedIn() && !infoService.getIsBooking() && !infoService.getIsBookingList()">
             <button class="bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-400 text-white border
                     font-bold py-2 px-4 rounded" id="bookBtn" (click)="onBook(property)">Book</button>
           </ng-container>
@@ -38,7 +48,7 @@ import {PropertyService} from "../../service/property.service";
           </ng-container>
           <ng-container *ngIf="storageService.isAdminLoggedIn() && infoService.getIsEditing()">
             <button class="bg-red-500 hover:bg-red-700 active:bg-red-400 text-white border
-            font-bold py-2 px-4 rounded" id="editBtn" (click)="onDelete(property)">Delete</button>
+            font-bold py-2 px-4 rounded" id="deleteBtn" (click)="onDelete(property)">Delete</button>
           </ng-container>
         </div>
 
@@ -48,16 +58,31 @@ import {PropertyService} from "../../service/property.service";
   `,
   styleUrl: './property.component.scss'
 })
-export class PropertyComponent{
+export class PropertyComponent implements OnInit{
 
   @Input()
   property !: PropertyDto;
+  booking!:BookDto;
   storageService= StorageService;
 
   constructor(private router: Router,
               protected infoService:InfoService,
-              private propertyService:PropertyService) {
+              private propertyService:PropertyService,
+              private bookingService:BookingService) {
   }
+  ngOnInit() {
+    if(this.infoService.getIsBookingList()){
+      this.bookingService.getBookingByPropertyId(this.property.id).subscribe(resp=>{
+        this.booking =resp;
+        console.log('awa')
+        console.log(resp);
+      });
+    }
+
+
+
+  }
+
   setProperty(property:PropertyDto){
     this.infoService.setProperty(property);
   }
@@ -67,7 +92,6 @@ export class PropertyComponent{
     this.router.navigate(['/update-property',{property:JSON.stringify(property)}]);
   }
   onDelete(property: PropertyDto) {
-    console.log(property.id.valueOf())
     this.propertyService.deleteProperty(property.id.valueOf()).subscribe(resp=>{
       console.log("Succesfully deleted");
       this.router.navigateByUrl("/listed-property")
@@ -78,7 +102,19 @@ export class PropertyComponent{
   }
 
   onBook(property:PropertyDto) {
-    console.log(property)
+    if(this.storageService.getUserId()==null){
+      this.router.navigateByUrl("/signin")
+      return;
+    }
     this.router.navigate(["/booking",{property:JSON.stringify(property)}])
+  }
+
+  onCancel(property: PropertyDto) {
+    this.bookingService.deleteBooking(property.id).subscribe(resp=>{
+      console.log(resp);
+    },error => {
+      console.log("Something went wrong "+error);
+    })
+
   }
 }

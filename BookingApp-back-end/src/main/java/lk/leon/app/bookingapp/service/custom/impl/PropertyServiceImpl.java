@@ -63,9 +63,14 @@ public class PropertyServiceImpl implements PropertyService {
         if(currentProperty.getPictureList().size() >0){
             for (Picture picture : currentProperty.getPictureList()){
                 pictureRepository.delete(picture);
+                System.out.println("awa");
+                System.out.println(picture.getPicturePath());
                 bucket.get(picture.getPicturePath()).delete();
+                System.out.println("awa");
             }
+            System.out.println("giya");
         }
+        System.out.println(newProperty);
         newProperty = propertyRepository.save(newProperty);
 
         if(propertyReqTo.getPictureList() != null && propertyReqTo.getPictureList().size() > 0){
@@ -124,8 +129,7 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyTo;
     }
 
-    @Override
-    public List<PropertyTo> getProperties(PropertyType type) {
+    public List<PropertyTo> getPropertiesByType(PropertyType type) {
         List<Property> propertyList = (type==null) ? propertyRepository.findAll() : propertyRepository.findPropertyByType(type);
 
         List<PropertyTo> propertyTos = propertyList.stream().map(property -> {
@@ -138,8 +142,7 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyTos;
     }
 
-    @Override
-    public List<PropertyTo> getProperties(Integer id) {
+    public List<PropertyTo> getPropertiesByUserId(Integer id) {
         if(propertyRepository.findPropertyByUserId(id)==null) return null;
         List<Property> propertyList = propertyRepository.findPropertyByUserId(id);
         List<PropertyTo> propertyTos = propertyList.stream().map(property -> {
@@ -152,6 +155,7 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyTos;
 
     }
+
 
     public PropertyTo hotelWithImage(Property property, PropertyTo propertyTo){
         List<String> imageList = new ArrayList<>();

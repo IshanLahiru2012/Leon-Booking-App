@@ -9,7 +9,7 @@ export class InfoService {
   private property!: PropertyDto;
   private isEditing:boolean = false;
   private isBooking:boolean =false;
-  private imagePrv : Observable<boolean> = of(true);
+  private isBookingList =false;
 
   setProperty(property: PropertyDto){
     this.property = property;
@@ -28,6 +28,12 @@ export class InfoService {
   }
   getIsBooking(){
     return this.isBooking;
+  }
+  setIsBookingList(state:boolean){
+    this.isBookingList = state;
+  }
+  getIsBookingList(){
+    return this.isBookingList;
   }
 
 
