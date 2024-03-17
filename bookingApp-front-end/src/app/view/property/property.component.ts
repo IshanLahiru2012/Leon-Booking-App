@@ -36,7 +36,7 @@ import {BookDto} from "../../dto/book.dto";
         <div class="text-right m-1">
           <ng-container *ngIf="storageService.isClientLoggedIn() && infoService.getIsBookingList()">
             <button class="bg-amber-500 hover:bg-amber-600 active:bg-amber-400 text-white border
-                    font-bold py-2 px-4 rounded" id="cancelBtn" (click)="onCancel(property)">Cancel</button>
+                    font-bold py-2 px-4 rounded" id="cancelBtn" (click)="onCancel(booking)">Cancel</button>
           </ng-container>
           <ng-container *ngIf="!storageService.isAdminLoggedIn() && !infoService.getIsBooking() && !infoService.getIsBookingList()">
             <button class="bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-400 text-white border
@@ -74,7 +74,7 @@ export class PropertyComponent implements OnInit{
     if(this.infoService.getIsBookingList()){
       this.bookingService.getBookingByPropertyId(this.property.id).subscribe(resp=>{
         this.booking =resp;
-        console.log('awa')
+        console.log(this.property.id+' '+this.property.name);
         console.log(resp);
       });
     }
@@ -109,8 +109,9 @@ export class PropertyComponent implements OnInit{
     this.router.navigate(["/booking",{property:JSON.stringify(property)}])
   }
 
-  onCancel(property: PropertyDto) {
-    this.bookingService.deleteBooking(property.id).subscribe(resp=>{
+  onCancel(booking:BookDto) {
+    console.log()
+    this.bookingService.deleteBooking(booking.bookingId).subscribe(resp=>{
       console.log(resp);
     },error => {
       console.log("Something went wrong "+error);

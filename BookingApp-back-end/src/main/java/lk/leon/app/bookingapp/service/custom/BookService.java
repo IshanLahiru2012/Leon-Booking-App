@@ -13,5 +13,5 @@ public interface BookService extends SuperService {
     BookTo saveBook(BookReqTo bookReqTo);
     BookTo getBook(Integer id);
     void deleteBooking(Integer id);
-    List<Property> getBookedPropertiesByUserId(Integer id);
+
 }

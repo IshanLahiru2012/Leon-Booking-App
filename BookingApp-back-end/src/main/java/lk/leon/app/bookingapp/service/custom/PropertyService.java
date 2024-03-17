@@ -16,5 +16,6 @@ public interface PropertyService extends SuperService {
     PropertyTo getPropertyDetails(Integer hotelId);
     List<PropertyTo> getPropertiesByType(PropertyType type);
     List<PropertyTo> getPropertiesByUserId(Integer id);
+    List<PropertyTo> getBookedPropertiesByUserId(Integer id);
 
 }

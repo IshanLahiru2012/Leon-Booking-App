@@ -1,11 +1,13 @@
 package lk.leon.app.bookingapp.api;
 
+import lk.leon.app.bookingapp.entity.Property;
 import lk.leon.app.bookingapp.service.custom.PropertyService;
 import lk.leon.app.bookingapp.to.PropertyTo;
 import lk.leon.app.bookingapp.to.request.PropertyReqTo;
 import lk.leon.app.bookingapp.util.PropertyType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,6 +54,11 @@ public class PropertyHttpController {
         return propertyService.getPropertiesByUserId(id);
     }
 
+    @GetMapping(value ="/booked-user" )
+    public ResponseEntity<?> getPropertyByBookedUserId(@RequestParam(required = false) Integer id){
+        List<PropertyTo> bookedPropertiesByUserId = propertyService.getBookedPropertiesByUserId(id);
+        return new ResponseEntity<>(bookedPropertiesByUserId,HttpStatus.OK);
+    }
 
 
 

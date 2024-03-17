@@ -43,9 +43,5 @@ public class BookHttpController {
         bookService.deleteBooking(id);
         return new ResponseEntity<>("Booking deleted successfully",HttpStatus.OK);
     }
-    @GetMapping(value ="/booked-user" )
-    public ResponseEntity<?> getPropertyByBookedUserId(@RequestParam(required = false) Integer id){
-        List<Property> bookedPropertiesByUserId = bookService.getBookedPropertiesByUserId(id);
-        return new ResponseEntity<>(bookedPropertiesByUserId,HttpStatus.OK);
-    }
+
 }

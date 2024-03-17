@@ -36,6 +36,10 @@ export class PropertyServiceImpl implements PropertyService{
 
   }
 
+  getPropertyByBookedUserId(id:number):Observable<PropertyDto[]>{
+    return  this.http.get<Array<PropertyDto>>(`${this.API_BASE_URL}/booked-user?id=${id}`);
+
+  }
 
 
   isInitialized(): boolean {

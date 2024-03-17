@@ -22,8 +22,5 @@ export class BookingService {
   deleteBooking(bookingId:number):Observable<any>{
     return this.http.delete(`${this.API_BASE_URL}/${bookingId}`)
   }
-  getPropertyByBookedUserId(id:number):Observable<PropertyDto[]>{
-    return  this.http.get<Array<PropertyDto>>(`${this.API_BASE_URL}/booked-user?id=${id}`);
 
-  }
 }

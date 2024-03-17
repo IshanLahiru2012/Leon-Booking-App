@@ -12,7 +12,6 @@ import java.util.List;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book,Integer> {
-    @Query("SELECT p FROM Book b INNER JOIN b.property p WHERE b.user.id = :userId")
-    List<Property> getBookedPropertyByUserId(@Param("userId") Integer id);
+
 
 }

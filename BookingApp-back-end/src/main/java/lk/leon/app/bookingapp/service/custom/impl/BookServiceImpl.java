@@ -53,12 +53,5 @@ public class BookServiceImpl implements BookService {
         bookRepository.deleteById(id);
     }
 
-    @Override
-    public List<Property> getBookedPropertiesByUserId(Integer id) {
-        List<Property> bookedPropertyByUserId = bookRepository.getBookedPropertyByUserId(id);
-        System.out.println(bookedPropertyByUserId);
-        System.out.println("awa");
-        return bookedPropertyByUserId;
 
-    }
 }

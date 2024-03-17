@@ -26,12 +26,11 @@ export class BookedListComponent implements OnInit,OnDestroy{
 
   constructor(private propertyService: PropertyService ,
               private route:ActivatedRoute,
-              private infoService:InfoService,
-              private bookingService: BookingService) {
+              private infoService:InfoService) {
   }
 
   ngOnInit() {
-    this.propertyList$ = this.bookingService.getPropertyByBookedUserId(StorageService.getUserId());
+    this.propertyList$ = this.propertyService.getPropertyByBookedUserId(StorageService.getUserId());
     this.infoService.setIsBookingList(true);
   }
   ngOnDestroy() {

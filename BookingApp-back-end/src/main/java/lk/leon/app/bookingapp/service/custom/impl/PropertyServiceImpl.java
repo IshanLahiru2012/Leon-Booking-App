@@ -155,6 +155,22 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyTos;
 
     }
+    @Override
+    public List<PropertyTo> getBookedPropertiesByUserId(Integer id) {
+        if(propertyRepository.getBookedPropertyByUserId(id)==null) return null;
+        List<Property> bookedPropertyByUserId = propertyRepository.getBookedPropertyByUserId(id);
+        List<PropertyTo> bookedPropertyToList = bookedPropertyByUserId.stream().map(property -> {
+            PropertyTo propertyTo = transformer.toPropertyTo(property);
+            if(property.getPictureList() != null && property.getPictureList().size()>0){
+                return hotelWithImage(property,propertyTo);
+            }
+            return propertyTo;
+        }).collect(Collectors.toList());
+        System.out.println(bookedPropertyByUserId);
+        System.out.println("awa");
+        return bookedPropertyToList;
+
+    }
 
 
     public PropertyTo hotelWithImage(Property property, PropertyTo propertyTo){
