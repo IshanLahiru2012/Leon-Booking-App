@@ -8,6 +8,7 @@ import lk.leon.app.bookingapp.service.custom.BookService;
 import lk.leon.app.bookingapp.service.custom.PropertyService;
 import lk.leon.app.bookingapp.service.custom.UserService;
 import lk.leon.app.bookingapp.service.util.Transformer;
+import lk.leon.app.bookingapp.to.BookPropertTo;
 import lk.leon.app.bookingapp.to.BookTo;
 import lk.leon.app.bookingapp.to.PropertyTo;
 import lk.leon.app.bookingapp.to.request.BookReqTo;
@@ -15,7 +16,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +39,6 @@ public class BookServiceImpl implements BookService {
         book.setProperty(property1);
         Book booked = bookRepository.save(book);
         BookTo bookTo = transformer.toBookTo(booked);
-        System.out.println(bookTo);
         return bookTo;
     }
 
@@ -51,6 +53,12 @@ public class BookServiceImpl implements BookService {
     public void deleteBooking(Integer id) {
         bookRepository.findById(id).orElseThrow(() -> new RuntimeException("No property Associated with the id"));
         bookRepository.deleteById(id);
+    }
+
+    @Override
+    public BookTo getBookedByPropertyId(Integer id) {
+        Book book = bookRepository.getBookByPropertyId(id);
+        return transformer.toBookTo(book);
     }
 
 

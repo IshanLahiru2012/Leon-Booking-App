@@ -6,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import {StorageService} from "../../service/storage.service";
 import {InfoService} from "../../service/info.service";
 import {BookingService} from "../../service/booking.service";
+import {BookDto} from "../../dto/book.dto";
 
 @Component({
   selector: 'app-booked-list',

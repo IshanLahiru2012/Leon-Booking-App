@@ -166,8 +166,6 @@ public class PropertyServiceImpl implements PropertyService {
             }
             return propertyTo;
         }).collect(Collectors.toList());
-        System.out.println(bookedPropertyByUserId);
-        System.out.println("awa");
         return bookedPropertyToList;
 
     }

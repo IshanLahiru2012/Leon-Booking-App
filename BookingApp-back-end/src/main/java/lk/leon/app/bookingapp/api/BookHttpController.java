@@ -1,9 +1,8 @@
 package lk.leon.app.bookingapp.api;
 
-import lk.leon.app.bookingapp.entity.Property;
 import lk.leon.app.bookingapp.service.custom.BookService;
+import lk.leon.app.bookingapp.to.BookPropertTo;
 import lk.leon.app.bookingapp.to.BookTo;
-import lk.leon.app.bookingapp.to.PropertyTo;
 import lk.leon.app.bookingapp.to.request.BookReqTo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -41,7 +40,12 @@ public class BookHttpController {
     @DeleteMapping(value = "/{bookingId}")
     public ResponseEntity<?> deleteBooking(@PathVariable("bookingId") Integer id){
         bookService.deleteBooking(id);
-        return new ResponseEntity<>("Booking deleted successfully",HttpStatus.OK);
+        return new ResponseEntity<>("Booking deleted successfully",HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping(value ="/booked-user" )
+    public ResponseEntity<?> getPropertyByBookedUserId(@RequestParam(required = false) Integer id){
+        BookTo bookedByPropertyId = bookService.getBookedByPropertyId(id);
+        return new ResponseEntity<>(bookedByPropertyId,HttpStatus.OK);
+    }
 }

@@ -1,6 +1,7 @@
 package lk.leon.app.bookingapp.api;
 
 import lk.leon.app.bookingapp.entity.Property;
+import lk.leon.app.bookingapp.service.custom.BookService;
 import lk.leon.app.bookingapp.service.custom.PropertyService;
 import lk.leon.app.bookingapp.to.PropertyTo;
 import lk.leon.app.bookingapp.to.request.PropertyReqTo;
@@ -20,6 +21,8 @@ public class PropertyHttpController {
 
     @Autowired
     private PropertyService propertyService;
+    @Autowired
+    private BookService bookService;
 
 
     @ResponseStatus(HttpStatus.CREATED)
