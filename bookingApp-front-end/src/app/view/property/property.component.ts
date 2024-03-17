@@ -78,8 +78,6 @@ export class PropertyComponent implements OnInit{
     if(this.infoService.getIsBookingList()){
       this.bookingService.getBookedPropertyId(this.property.id).subscribe(resp=>{
         this.booking =resp;
-        console.log(this.property.id+' '+this.property.name);
-        console.log(resp);
       });
     }
 

@@ -8,9 +8,10 @@ import {StorageService} from "../../service/storage.service";
     <section class="dark:bg-sky-700">
         <header class="flex justify-between border-b p-4">
           <h1 class="font-bold bg-gradient-to-r from-orange-500 to-sky-500 bg-clip-text text-transparent hover:cursor-pointer"
-              routerLink="/body" routerLinkActive="active">Leon Booking App</h1>
+              routerLink="/listed-property" routerLinkActive="active">Leon Booking App</h1>
           <ng-container *ngIf="storageService.isNonLogged()">
             <div class="flex gap-3">
+              <button class="text-white hover:bg-sky-600 rounded px-2 py-1" (click)="navigateToTheHome()">Dashboard</button>
               <button class="border-2 px-1 bg-gradient-to-l from-emerald-500 to-cyan-400 text-gray-600 border-sky-700 rounded-xl hover:border-cyan-500 active:border-white"
                       routerLink="/register" routerLinkActive="active">Register</button>
               <button class="border-2 px-1 bg-gradient-to-l from-emerald-500 to-cyan-400 text-gray-600 border-sky-700 rounded-xl hover:border-cyan-500 active:border-white"
@@ -27,6 +28,7 @@ import {StorageService} from "../../service/storage.service";
           </ng-container>
           <ng-container *ngIf="storageService.isClientLoggedIn()">
             <div class="flex gap-3">
+              <button class="text-white hover:bg-sky-600 rounded px-2 py-1" (click)="navigateToTheHome()">Dashboard</button>
               <button class="text-white hover:bg-sky-600 rounded px-2 py-1" (click)="onBooking()">Your Bookings</button>
               <button class="border-2 px-1 bg-gradient-to-l from-emerald-500 to-cyan-400 text-gray-600 border-sky-700 rounded-xl hover:border-cyan-500 active:border-white"
                        (click)="logout()" routerLinkActive="active">Logout</button>
