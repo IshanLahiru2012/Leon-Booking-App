@@ -26,13 +26,12 @@ export class PropertyServiceImpl implements PropertyService{
     );
   }
   getPropertyByType(type:string):Observable<PropertyDto[]>{
-    return  this.http.get<Array<PropertyDto>>(`${this.API_BASE_URL}?type=${type}`)
-      .pipe(finalize(()=> this.initialized =true))
+    return  this.http.get<Array<PropertyDto>>(`${this.API_BASE_URL}?type=${type}`);
 
   }
+
   getPropertyByUserId(id:number):Observable<PropertyDto[]>{
-    return  this.http.get<Array<PropertyDto>>(`${this.API_BASE_URL}/user?id=${id}`)
-      .pipe(finalize(()=> this.initialized =true))
+    return  this.http.get<Array<PropertyDto>>(`${this.API_BASE_URL}/user?id=${id}`);
 
   }
 
@@ -40,25 +39,24 @@ export class PropertyServiceImpl implements PropertyService{
     return  this.http.get<Array<PropertyDto>>(`${this.API_BASE_URL}/booked-user?id=${id}`);
 
   }
-
-
   isInitialized(): boolean {
     return false;
   }
 
   saveProperty(propReqDto:FormData): Observable<PropertyDto> {
-    return this.http.post<PropertyDto>(`${this.API_BASE_URL}`,propReqDto)
-      .pipe(finalize(()=> this.initialized =true));
+    return this.http.post<PropertyDto>(`${this.API_BASE_URL}`,propReqDto);
   }
 
   deleteProperty(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.API_BASE_URL}/${id}`)
-      .pipe(finalize(()=>this.initialized=true));
+    return this.http.delete<any>(`${this.API_BASE_URL}/${id}`);
   }
 
   updateProperty(id:number,formData: FormData): Observable<PropertyDto> {
-    return this.http.patch<PropertyDto>(`${this.API_BASE_URL}/${id}`,formData)
-      .pipe(finalize(()=>this.initialized=true));
+    return this.http.patch<PropertyDto>(`${this.API_BASE_URL}/${id}`,formData);
+  }
+
+  getPropertyByCity(city: string): Observable<PropertyDto[]> {
+    return this.http.get<Array<PropertyDto>>(`${this.API_BASE_URL}/search?city=${city}`);
   }
 
 

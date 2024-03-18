@@ -16,6 +16,8 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
     List<Property> findPropertyByType(PropertyType type);
     @Query("SELECT p FROM Property p WHERE p.user.id= :userId")
     List<Property> findPropertyByUserId(@Param("userId") Integer id);
+    @Query("SELECT p FROM Property p WHERE p.city= :city")
+    List<Property> getPropertyByCity(@Param("city") String city);
     @Query("SELECT p FROM Property p WHERE p.id IN (SELECT b.property.id FROM Book b WHERE b.user.id = :userId)")
     List<Property> getBookedPropertyByUserId(@Param("userId") Integer id);
     @Query("SELECT p FROM Property p WHERE p.type = lk.leon.app.bookingapp.util.PropertyType.APARTMENT")

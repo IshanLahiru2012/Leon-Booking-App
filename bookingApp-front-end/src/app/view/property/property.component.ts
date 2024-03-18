@@ -16,14 +16,14 @@ import {BookListDto} from "../../dto/bookList.dto";
     <div class="grid grid-cols-12 border-amber-400 border-2 rounded-lg ">
       <div *ngIf="property.pictureList" class="col-span-5 image-container rounded-lg ">
         <img [src]="property.pictureList[0]" alt="Property Image" class="image hover:cursor-pointer "
-             [routerLink]="['/image']" (click)="setProperty(property)">
+             [routerLink]="['/image',{prop:JSON.stringify(property)}]">
       </div>
       <div *ngIf="!property.pictureList" class="col-span-5 image-container border-r-2 border-amber-100 rounded-lg text-wrap  text-center flex items-center justify-center">
         <span class="">No Image to Preview</span>
       </div>
       <div class="col-span-7 flex flex-col justify-between">
         <div class="flex flex-col">
-          <a class="pl-4 font-bold hover:underline hover:cursor-pointer" [routerLink]="['/image']" (click)="setProperty(property)"> {{property.name}}</a>
+          <a class="pl-4 font-bold hover:underline hover:cursor-pointer" [routerLink]="['/image',{prop:JSON.stringify(property)}]"> {{property.name}}</a>
           <span class="text-gray-400 text-sm pl-5">{{property.city}}</span>
           <span class="text-gray-400 text-sm pl-5">{{property.type}}</span>
           <span class="text-gray-400 text-sm pl-5" *ngIf="booking">Rooms:{{booking.rooms}}</span>
@@ -66,6 +66,7 @@ export class PropertyComponent implements OnInit{
   property !: PropertyDto;
   booking!:BookDto;
   storageService= StorageService;
+  protected readonly JSON = JSON;
 
   constructor(private router: Router,
               protected infoService:InfoService,
@@ -81,10 +82,6 @@ export class PropertyComponent implements OnInit{
       });
     }
 
-  }
-
-  setProperty(property:PropertyDto){
-    this.infoService.setProperty(property);
   }
 
   onUpdate(property:PropertyDto) {
@@ -121,4 +118,6 @@ export class PropertyComponent implements OnInit{
     })
 
   }
+
+
 }

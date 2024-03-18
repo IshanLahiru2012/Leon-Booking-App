@@ -62,6 +62,12 @@ public class PropertyHttpController {
         List<PropertyTo> bookedPropertiesByUserId = propertyService.getBookedPropertiesByUserId(id);
         return new ResponseEntity<>(bookedPropertiesByUserId,HttpStatus.OK);
     }
+    @GetMapping(value = "/search")
+    public ResponseEntity<?> getPropertyByBookedUserId(@RequestParam(required = false) String city){
+        List<PropertyTo> bookedPropertiesByUserId = propertyService.getPropertiesByCity(city);
+        System.out.println(city);
+        return new ResponseEntity<>(bookedPropertiesByUserId,HttpStatus.OK);
+    }
 
 
 

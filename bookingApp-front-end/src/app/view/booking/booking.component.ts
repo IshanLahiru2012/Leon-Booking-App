@@ -1,16 +1,13 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {PropertyDto} from "../../dto/property.dto";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {provideNativeDateAdapter} from '@angular/material/core';
+
 import {InfoService} from "../../service/info.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BookingService} from "../../service/booking.service";
-import {BookDto} from "../../dto/book.dto";
+
 import {BookReqDto} from "../../dto/book.req.dto";
-import {Subscription} from "rxjs";
+
 import {StorageService} from "../../service/storage.service";
 
 

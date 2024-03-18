@@ -11,6 +11,7 @@ import {SavePropertyComponent} from "./view/save-property/save-property.componen
 import {UpdatePropertyComponent} from "./view/update-property/update-property.component";
 import {BookingComponent} from "./view/booking/booking.component";
 import {BookedListComponent} from "./view/booked-list/booked-list.component";
+import {SearchListComponent} from "./view/search-list/search-list.component";
 
 const APP_ROUTES: Routes=[
   {
@@ -60,6 +61,10 @@ const APP_ROUTES: Routes=[
   {
     path:'register',
     component: SignupComponent
+  },
+  {
+    path:'search/:city',
+    component: SearchListComponent
   },
   {
     path:'',

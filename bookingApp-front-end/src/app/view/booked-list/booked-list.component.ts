@@ -18,6 +18,9 @@ import {BookDto} from "../../dto/book.dto";
         </div>
       </div>
     </div>
+    <div *ngIf="(propertyList$ | async)?.length ===0" class="empty">
+      <p> No Properties in your List</p>
+    </div>
   `,
   styleUrl: './booked-list.component.scss'
 })

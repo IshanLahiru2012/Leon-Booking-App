@@ -19,33 +19,14 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { ListedPropertyComponent } from './view/listed-property/listed-property.component';
 import { SavePropertyComponent } from './view/save-property/save-property.component';
 import {NgZorroImportModule} from "./ng-zorro-import.module";
-import {MatFormField} from "@angular/material/form-field";
-import {MatInput, MatInputModule} from "@angular/material/input";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {
-  MatCard,
-  MatCardActions,
-  MatCardContent,
-  MatCardHeader,
-  MatCardMdImage,
-  MatCardTitle
-} from "@angular/material/card";
-import {MatOption, MatSelect} from "@angular/material/select";
-import {MatIcon} from "@angular/material/icon";
-import {MatButton, MatMiniFabButton} from "@angular/material/button";
-import {MatProgressBar} from "@angular/material/progress-bar";
-import {NzImageGroupComponent} from "ng-zorro-antd/image";
+
 import { UpdatePropertyComponent } from './view/update-property/update-property.component';
 import { BookingComponent } from './view/booking/booking.component';
-import {
-  MatDatepicker,
-  MatDatepickerInput,
-  MatDatepickerModule,
-  MatDatepickerToggle
-} from "@angular/material/datepicker";
-import {MatNativeDateModule} from "@angular/material/core";
-import {MatCheckbox} from "@angular/material/checkbox";
 import { BookedListComponent } from './view/booked-list/booked-list.component';
+import { FooterComponent } from './view/footer/footer.component';
+import {MatImportModule} from "./mat-import.module";
+import { SearchListComponent } from './view/search-list/search-list.component';
 
 
 
@@ -67,40 +48,20 @@ import { BookedListComponent } from './view/booked-list/booked-list.component';
     SavePropertyComponent,
     UpdatePropertyComponent,
     BookingComponent,
-    BookedListComponent
+    BookedListComponent,
+    FooterComponent,
+    SearchListComponent
 
   ],
     imports: [
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        RoutingModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        NgZorroImportModule,
-        MatFormField,
-        MatInputModule,
-        MatInput,
-        MatCardContent,
-        MatCard,
-        MatCardHeader,
-        MatCardTitle,
-        MatSelect,
-        MatOption,
-        MatIcon,
-        MatButton,
-        MatCardMdImage,
-        MatMiniFabButton,
-        MatProgressBar,
-        MatCardActions,
-        NzImageGroupComponent,
-        MatDatepickerInput,
-        MatDatepickerToggle,
-        MatDatepicker,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatCheckbox
-
+      BrowserModule,
+      FormsModule,
+      HttpClientModule,
+      RoutingModule,
+      ReactiveFormsModule,
+      BrowserAnimationsModule,
+      NgZorroImportModule,
+      MatImportModule
     ],
 
   providers: [

@@ -10,11 +10,15 @@ import {ActivatedRoute} from "@angular/router";
   template: `
     <div class="bg-amber-50 pt-2">
       <div class="grid sm:grid-cols-1 md:grid-cols-2  gap-2 px-2">
-        <div *ngFor="let property of propertyList$ | async" >
+        <div *ngFor="let property of propertyList$ | async">
           <app-property [property]="property"/>
         </div>
       </div>
     </div>
+    <div *ngIf="(propertyList$ | async)?.length ===0" class="empty">
+      <p> No Properties in your List</p>
+    </div>
+
   `,
   styleUrl: './listed-property.component.scss'
 })

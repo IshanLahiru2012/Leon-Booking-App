@@ -1,6 +1,7 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {InfoService} from "../../service/info.service";
 import {PropertyDto} from "../../dto/property.dto";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-image-list',
@@ -19,10 +20,15 @@ import {PropertyDto} from "../../dto/property.dto";
 export class ImageListComponent implements OnInit{
 
   property!: PropertyDto;
-  constructor(private imageListService: InfoService) {
+  constructor(private imageListService: InfoService, private route:ActivatedRoute) {
 
   }
   ngOnInit(): void{
-    this.property = this.imageListService.getProperty();
+
+    this.route.params.subscribe(param=>{
+      const paramData = param['prop'];
+      this.property = JSON.parse(paramData) as PropertyDto;
+    })
+
   }
 }

@@ -15,6 +15,9 @@ import {StorageService} from "../../service/storage.service";
         </div>
       </div>
     </div>
+    <div *ngIf="(propertyList$ | async)?.length ===0" class="empty">
+      <p> No Properties Listed</p>
+    </div>
   `,
   styleUrl: './property-list.component.scss'
 })

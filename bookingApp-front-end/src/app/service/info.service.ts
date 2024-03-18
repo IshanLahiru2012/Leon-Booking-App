@@ -11,12 +11,6 @@ export class InfoService {
   private isBooking:boolean =false;
   private isBookingList =false;
 
-  setProperty(property: PropertyDto){
-    this.property = property;
-  }
-  getProperty(){
-    return this.property;
-  }
   getIsEditing(){
     return this.isEditing
   }
