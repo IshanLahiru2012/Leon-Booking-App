@@ -14,7 +14,7 @@ import {Router} from "@angular/router";
           <div class="child">
             <div nz-row class="imgDiv">
               <div nz-col nzSpan="24">
-                <h1 style="margin-left: 80px;">Sign Up</h1>
+                <h1 style="margin-left: 100px">Sign Up</h1>
               </div>
             </div>
 
@@ -72,7 +72,7 @@ import {Router} from "@angular/router";
 
               <button nz-button class="login-form-btn login-form-margin" [disabled]="signupForm.invalid"
                       (click)="register()" [nzType]="'primary'">Register</button>
-              or <a routerLink="/login">Login now</a>
+              Already have an account ? <a routerLink="/login" class="text-amber-700">Login now</a>
             </form>
           </div>
         </div>

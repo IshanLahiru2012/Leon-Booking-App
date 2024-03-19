@@ -46,8 +46,8 @@ import {NzMessageService} from "ng-zorro-antd/message";
 <!--                </div>-->
 <!--              </div>-->
               <button nz-button class="login-form-button login-form-margin" [disabled]="loginForm.invalid" (click)="login()" [nzType]="'primary'">Log in</button>
-              Or
-              <a routerLink="/register">register now!</a>
+              Don't have an account ?
+              <a routerLink="/register" class="text-amber-700">register now!</a>
             </form>
           </div>
         </div>

@@ -23,7 +23,7 @@ import {BookListDto} from "../../dto/bookList.dto";
       </div>
       <div class="col-span-7 flex flex-col justify-between">
         <div class="flex flex-col">
-          <a class="pl-4 font-bold hover:underline hover:cursor-pointer" [routerLink]="['/image',{prop:JSON.stringify(property)}]"> {{property.name}}</a>
+          <a class="pl-4 pt-1 font-bold text-l text-amber-700 hover:underline hover:cursor-pointer" [routerLink]="['/image',{prop:JSON.stringify(property)}]"> {{property.name}}</a>
           <span class="text-gray-400 text-sm pl-5">{{property.city}}</span>
           <span class="text-gray-400 text-sm pl-5">{{property.type}}</span>
           <span class="text-gray-400 text-sm pl-5" *ngIf="booking">Rooms:{{booking.rooms}}</span>
