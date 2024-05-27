@@ -37,7 +37,7 @@ public class WebSecurityConfiguration {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(req ->
                 req.antMatchers("/api/v1/auths/**").permitAll()
-                        .antMatchers("/api/v1/properties").permitAll()
+                        .antMatchers("/api/v1/properties").hasAnyAuthority(UserRole.ADMIN.name(),UserRole.CLIENT.name())
                         .antMatchers("/api/v1/properties/**").hasAnyAuthority(UserRole.ADMIN.name(),UserRole.CLIENT.name())
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
