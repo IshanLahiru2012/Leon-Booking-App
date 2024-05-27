@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -27,6 +28,8 @@ public class User implements SuperEntity, UserDetails {
     @Column(length = 100, nullable = false)
     private String password;
     @Enumerated(EnumType.STRING)
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    private Set<UserRole> roles;
 //    @Column(nullable = false, columnDefinition = "ENUM('ADMIN','CLIENT')")
     private UserRole userRole;
 

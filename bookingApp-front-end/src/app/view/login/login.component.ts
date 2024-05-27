@@ -88,7 +88,9 @@ export class LoginComponent {
             role: resp.userRole
           }
           StorageService.saveUser(user);
+          this.authService.setToken(resp.jwt);
           StorageService.saveToken(resp.jwt);
+
           if (StorageService.isAdminLoggedIn()){
             this.message.success("Admin Login Successfully", {nzDuration:5000})
             this.router.navigateByUrl("/listed-property")

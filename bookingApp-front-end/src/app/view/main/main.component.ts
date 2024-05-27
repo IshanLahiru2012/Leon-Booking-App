@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 import {StorageService} from "../../service/storage.service";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-main',
@@ -9,7 +10,7 @@ import {StorageService} from "../../service/storage.service";
       <div class="content">
         <section class="dark:bg-sky-700">
           <header class="flex justify-between border-b p-4">
-            <h1 class="font-bold bg-gradient-to-r from-orange-500 to-sky-500 bg-clip-text text-transparent text-2xl hover:cursor-pointer"
+            <h1 class="font-bold bg-gradient-to-r from-white to-sky-300 bg-clip-text text-transparent text-2xl hover:cursor-pointer"
                 (click)="navigateToTheHome()" routerLinkActive="active">Leon Booking App</h1>
             <ng-container *ngIf="storageService.isNonLogged()">
               <div class="flex gap-3">
@@ -49,7 +50,7 @@ import {StorageService} from "../../service/storage.service";
 export class MainComponent {
 
   storageService = StorageService;
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
 
   }
   navigateToTheHome(){
@@ -63,6 +64,7 @@ export class MainComponent {
 
   logout(){
     StorageService.logout();
+    this.authService.removeToken();
     this.router.navigateByUrl("/body")
   }
   listedProperty() {

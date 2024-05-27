@@ -10,7 +10,7 @@ import { PropertyComponent } from './view/property/property.component';
 import { PropertyListComponent } from './view/property-list/property-list.component';
 import {PropertyService} from "./service/property.service";
 import {PropertyServiceImpl} from "./service/property-service-impl";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { ImageListComponent } from './view/image-list/image-list.component';
 import { LoginComponent } from './view/login/login.component';
 import {RoutingModule} from "./routing.module";
@@ -27,6 +27,7 @@ import { BookedListComponent } from './view/booked-list/booked-list.component';
 import { FooterComponent } from './view/footer/footer.component';
 import {MatImportModule} from "./mat-import.module";
 import { SearchListComponent } from './view/search-list/search-list.component';
+import {AuthInterceptor} from "./intercept/authInterceptor";
 
 
 
@@ -66,6 +67,7 @@ import { SearchListComponent } from './view/search-list/search-list.component';
 
   providers: [
     {provide: PropertyService, useClass:PropertyServiceImpl},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true},
     provideAnimationsAsync()
 
   ],

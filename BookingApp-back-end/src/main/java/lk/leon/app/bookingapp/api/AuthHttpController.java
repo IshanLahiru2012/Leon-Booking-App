@@ -16,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.annotation.Validated;
@@ -51,8 +52,8 @@ public class AuthHttpController {
     public AuthRespTo authenticationResponse(@RequestBody AuthReqTo authenticationRequest)
             throws BadCredentialsException, DisabledException, UsernameNotFoundException {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    authenticationRequest.getEmail(),authenticationRequest.getPassword()));
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    authenticationRequest.getEmail(), authenticationRequest.getPassword()));
         }catch (BadCredentialsException e){
             throw new BadCredentialsException("Invalid Username or Password");
         }

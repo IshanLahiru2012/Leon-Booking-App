@@ -4,11 +4,11 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lk.leon.app.bookingapp.to.request.UserReqTo;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 
+import java.nio.file.attribute.UserPrincipal;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,7 +22,7 @@ public class JWTUtil {
         return extractClaim(token, Claims:: getSubject);
     }
     public String generateToken(UserDetails userDetails){
-        return generateToken(new HashMap<>(), userDetails);
+        return createToken(new HashMap<>(), userDetails);
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails){
@@ -35,10 +35,10 @@ public class JWTUtil {
         return claimResolvers.apply(claims);
     }
 
-    private String generateToken(Map<String,Object> extractClaims, UserDetails userDetails){
-        return Jwts.builder().setClaims(extractClaims).setSubject(userDetails.getUsername())
+    private String createToken(Map<String,Object> extractClaims, UserDetails userDetails){
+        return  Jwts.builder().setClaims(extractClaims).setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*24))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
     }
 

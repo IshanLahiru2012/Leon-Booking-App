@@ -7,7 +7,9 @@ import {Observable} from "rxjs";
 })
 export class AuthService {
 
-  private readonly API_BASE_URL = 'http://localhost:8080/api/v1/auths'
+  private readonly API_BASE_URL = 'http://localhost:8080/api/v1/auths';
+
+  private readonly TOKEN_KEY = 'auth_token';
   constructor(private http:HttpClient) {}
 
   register(signUpReq: any):Observable<any>{
@@ -15,6 +17,17 @@ export class AuthService {
   }
   login(loginReq: any):Observable<any>{
     return this.http.post(this.API_BASE_URL+"/login", loginReq);
+  }
+  setToken(token: string): void {
+    localStorage.setItem(this.TOKEN_KEY, token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem(this.TOKEN_KEY);
+  }
+
+  removeToken(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
   }
 
 }
