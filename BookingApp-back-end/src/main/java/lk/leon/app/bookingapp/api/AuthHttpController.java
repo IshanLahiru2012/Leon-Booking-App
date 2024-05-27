@@ -48,6 +48,10 @@ public class AuthHttpController {
         return new ResponseEntity<>(registeredUser,HttpStatus.CREATED);
 
     }
+    @GetMapping("/login")
+    public String authRedirect (){
+        return "check";
+    }
     @PostMapping("/login")
     public AuthRespTo authenticationResponse(@RequestBody AuthReqTo authenticationRequest)
             throws BadCredentialsException, DisabledException, UsernameNotFoundException {

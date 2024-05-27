@@ -7,6 +7,7 @@ import lk.leon.app.bookingapp.to.request.BookReqTo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +39,7 @@ public class BookHttpController {
         return new ResponseEntity<>(book,HttpStatus.OK);
     }
     @DeleteMapping(value = "/{bookingId}")
+    @PreAuthorize("hasAuthority(UserRole.ADMIN.name())")
     public ResponseEntity<?> deleteBooking(@PathVariable("bookingId") Integer id){
         bookService.deleteBooking(id);
         return new ResponseEntity<>("Booking deleted successfully",HttpStatus.NO_CONTENT);
